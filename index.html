@@ -11,9 +11,14 @@
 <meta property="og:title" content="Falah Collective">
 <meta property="og:description" content="Strive for success in everything you take part in.">
 <meta property="og:site_name" content="Falah Collective">
+<meta property="og:image" content="https://falahcollective.com/og-image.png">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="420">
+<meta property="og:image:alt" content="Falah — Strive for success in everything you take part in.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Falah Collective">
 <meta name="twitter:description" content="Strive for success in everything you take part in.">
+<meta name="twitter:image" content="https://falahcollective.com/og-image.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308080a'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c19a5b' stroke-width='1.5'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +91,7 @@
     color:var(--faint);opacity:0;transition:opacity 1s var(--ease) .3s;
   }
   .wm.on{opacity:1}
-  @media(max-width:1180px){.wm{top:1.35rem;left:1.35rem;font-size:.82rem}}
+  @media(max-width:1180px){.wm{top:max(1.35rem,env(safe-area-inset-top));left:max(1.35rem,env(safe-area-inset-left));font-size:.82rem}}
 
   /* ---------- opening ---------- */
   .open{min-height:100svh;display:grid;place-items:center;text-align:center;padding:7rem var(--gut) 6rem}
@@ -114,7 +119,7 @@
     animation:rise 1.6s var(--ease) 2.7s forwards;
   }
   .cue{
-    position:absolute;left:0;right:0;bottom:clamp(1.75rem,5vh,2.75rem);
+    position:absolute;left:0;right:0;bottom:max(clamp(1.75rem,5vh,2.75rem),env(safe-area-inset-bottom));
     text-align:center;
     font-size:.66rem;letter-spacing:.28em;color:var(--faint);opacity:0;
     animation:rise 1.4s var(--ease) 3.6s forwards;
