@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHA — Falah Collective</title>
+  <meta name="description" content="SHA is building Falah Collective — a growing network of brands, companies and ventures built around meaningful work." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --------------------------------------------------
+       RESET & BASE STYLES
+    -------------------------------------------------- */
+    :root {
+      --bg-color: #08080a;
+      --surface-color: #0f1015;
+      --surface-border: rgba(197, 160, 89, 0.15);
+      --text-main: #f0f0f3;
+      --text-muted: #8e909a;
+      --gold-primary: #c5a059;
+      --gold-dark: #8c6e30;
+      --gold-light: #e6cb85;
+      --font-serif: 'Cinzel', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 0%, #13151d 0%, var(--bg-color) 70%);
+    }
+
+    /* --------------------------------------------------
+       TYPOGRAPHY & UTILITIES
+    -------------------------------------------------- */
+    h1, h2, h3, h4, .brand-font {
+      font-family: var(--font-serif);
+      letter-spacing: 0.03em;
+      font-weight: 500;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-padding {
+      padding: 8rem 0;
+    }
+
+    .gold-accent {
+      color: var(--gold-primary);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--gold-primary);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--surface-border);
+      padding-bottom: 0.25rem;
+    }
+
+    /* --------------------------------------------------
+       NAVIGATION
+    -------------------------------------------------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: rgba(8, 8, 10, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 90px;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--text-main);
+    }
+
+    .logo span {
+      font-size: 0.75rem;
+      display: block;
+      color: var(--gold-primary);
+      letter-spacing: 0.3em;
+      font-weight: 400;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-primary);
+    }
+
+    .btn-cta {
+      border: 1px solid var(--gold-primary);
+      padding: 0.75rem 1.75rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold-primary);
+      background: transparent;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-cta:hover {
+      background: var(--gold-primary);
+      color: var(--bg-color);
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.25);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* --------------------------------------------------
+       HERO SECTION
+    -------------------------------------------------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      max-width: 750px;
+    }
+
+    .hero-secondary {
+      font-size: 0.95rem;
+      color: rgba(240, 240, 243, 0.7);
+      border-left: 2px solid var(--gold-primary);
+      padding-left: 1.5rem;
+      margin-bottom: 3.5rem;
+      font-style: italic;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .btn-secondary {
+      color: var(--text-main);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+    }
+
+    /* --------------------------------------------------
+       THE COLLECTIVE ECOSYSTEM
+    -------------------------------------------------- */
+    .collective-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .collective-card {
+      background: var(--surface-color);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3rem 2.5rem;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+
+    .collective-card.active {
+      border-color: var(--surface-border);
+    }
+
+    .collective-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(197, 160, 89, 0.4);
+    }
+
+    .card-status {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid currentColor;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+
+    .status-active { color: var(--gold-primary); border-color: var(--gold-primary); }
+    .status-building { color: #5a9be6; border-color: #5a9be6; }
+    .status-future { color: var(--text-muted); border-color: var(--text-muted); }
+
+    .collective-card h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .collective-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* --------------------------------------------------
+       FALAH PILL FEATURED SECTION
+    -------------------------------------------------- */
+    .falah-pill-section {
+      background: linear-gradient(180deg, var(--bg-color) 0%, #0d0c07 50%, var(--bg-color) 100%);
+      border-top: 1px solid var(--surface-border);
+      border-bottom: 1px solid var(--surface-border);
+      position: relative;
+    }
+
+    .pill-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .pill-content h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .pill-content p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .pill-box {
+      border: 1px solid var(--surface-border);
+      padding: 3rem;
+      background: rgba(15, 16, 21, 0.6);
+      backdrop-filter: blur(10px);
+    }
+
+    .pill-principles {
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .pill-principles li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .pill-principles li::before {
+      content: "—";
+      color: var(--gold-primary);
+    }
+
+    /* --------------------------------------------------
+       CREATOR PARTNERSHIPS
+    -------------------------------------------------- */
+    .metrics-row {
+      display: flex;
+      gap: 4rem;
+      margin: 3rem 0;
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .metric-item h3 {
+      font-size: 3.5rem;
+      color: var(--gold-primary);
+      line-height: 1;
+    }
+
+    .metric-item p {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .cap-item {
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .cap-num {
+      font-family: var(--font-serif);
+      color: var(--gold-primary);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    /* --------------------------------------------------
+       THE APPROACH / OPERATING PRINCIPLES
+    -------------------------------------------------- */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .principle-card {
+      border-left: 1px solid var(--surface-border);
+      padding-left: 2rem;
+    }
+
+    .principle-card h4 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .principle-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* --------------------------------------------------
+       CURRENT STATUS / TIMELINE
+    -------------------------------------------------- */
+    .timeline-list {
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 150px 1fr 2fr;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      align-items: center;
+    }
+
+    .timeline-phase {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-primary);
+    }
+
+    .timeline-item h4 {
+      font-size: 1.25rem;
+    }
+
+    .timeline-item p {
+      color: var(--text-muted);
+    }
+
+    /* --------------------------------------------------
+       IMPACT SECTION (PLACEHOLDER ARCHITECTURE)
+    -------------------------------------------------- */
+    .impact-placeholder {
+      border: 1px dashed var(--surface-border);
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-top: 3rem;
+      background: rgba(15, 16, 21, 0.3);
+    }
+
+    .impact-placeholder p {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* --------------------------------------------------
+       ABOUT SHA
+    -------------------------------------------------- */
+    .about-wrapper {
+      max-width: 800px;
+    }
+
+    .about-bio p {
+      font-size: 1.15rem;
+      color: var(--text-main);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .ig-quote-box {
+      border: 1px solid var(--surface-border);
+      padding: 2rem;
+      margin-top: 3rem;
+      background: var(--surface-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ig-quote-box blockquote {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      color: var(--gold-light);
+    }
+
+    /* --------------------------------------------------
+       CONTACT FORM
+    -------------------------------------------------- */
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--surface-color);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px rgba(197, 160, 89, 0.1);
+    }
+
+    .form-submit-btn {
+      grid-column: span 2;
+      margin-top: 1rem;
+    }
+
+    /* --------------------------------------------------
+       FOOTER
+    -------------------------------------------------- */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 5rem 0 3rem 0;
+      background: #050507;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* --------------------------------------------------
+       RESPONSIVE DESIGN
+    -------------------------------------------------- */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+      .pill-container { grid-template-columns: 1fr; gap: 2rem; }
+      .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .contact-form { grid-template-columns: 1fr; }
+      .form-group.full-width, .form-submit-btn { grid-column: span 1; }
+      .metrics-row { flex-direction: column; gap: 2rem; }
+      .ig-quote-box { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-content { flex-direction: column; gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">
+        SHA
+        <span>FALAH COLLECTIVE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#collective">Falah</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn-cta">Work with me</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-content">
+      <span class="tag">SHA — Founder / Operator</span>
+      <h1 class="hero-title">Building a network that makes a difference.</h1>
+      <p class="hero-subtitle">
+        Building brands, companies, and ventures designed to create meaningful impact — under Falah Collective.
+      </p>
+      <p class="hero-secondary">
+        Currently building Falah while working with selected creators to turn audiences into sustainable businesses.
+      </p>
+      <div class="hero-ctas">
+        <a href="#collective" class="btn-cta">Explore Falah</a>
+        <a href="#contact" class="btn-secondary">Work with me &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE COLLECTIVE -->
+  <section id="collective" class="section-padding">
+    <div class="container">
+      <span class="tag">The Ecosystem</span>
+      <h2>Falah Collective</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin-top: 0.5rem;">
+        A growing collective of companies, brands, and ventures built around meaningful work over decades.
+      </p>
+
+      <div class="collective-grid">
+        <!-- Falah Pill (Active) -->
+        <div class="collective-card active">
+          <span class="card-status status-active">Active Focus</span>
+          <h3>Falah Pill</h3>
+          <p>Media, identity, and practical self-development designed to help young Muslims navigate modern life with clarity and purpose.</p>
+        </div>
+
+        <!-- Learn Falah (Building) -->
+        <div class="collective-card">
+          <span class="card-status status-building">In Development</span>
+          <h3>Learn Falah</h3>
+          <p>An upcoming education and community initiative centered around lifelong skill-building and growth.</p>
+        </div>
+
+        <!-- Future Ventures -->
+        <div class="collective-card">
+          <span class="card-status status-future">Reserved</span>
+          <h3>Future Ecosystem</h3>
+          <p>Additional reserved brands being developed internally. Revealed publicly when close to launch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FALAH PILL (FEATURED) -->
+  <section class="section-padding falah-pill-section">
+    <div class="container pill-container">
+      <div class="pill-content">
+        <span class="tag">Primary Expression</span>
+        <h2>Start with the person.</h2>
+        <p>
+          Falah Pill is built to help young Muslim men navigate modern life without losing sight of who they are — strengthening identity, faith, character, discipline, and purpose.
+        </p>
+        <p>
+          You do not need to be perfect to improve. You do not need to become a scholar to pursue Islam seriously. You can live in modern society without abandoning your principles.
+        </p>
+        <a href="https://instagram.com" target="_blank" class="btn-cta" style="margin-top: 1rem; display: inline-block;">Explore Falah Pill &rarr;</a>
+      </div>
+
+      <div class="pill-box">
+        <h4 class="brand-font" style="color: var(--gold-primary); font-size: 1.2rem; margin-bottom: 1rem;">Core Pillars</h4>
+        <ul class="pill-principles">
+          <li>Islamic Identity & Character</li>
+          <li>Discipline & Mental Strength</li>
+          <li>Navigating Modern Life</li>
+          <li>Practical Purpose & Guidance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATOR PARTNERSHIPS -->
+  <section id="work" class="section-padding">
+    <div class="container">
+      <span class="tag">Creator Business</span>
+      <h2>Turn attention into something meaningful.</h2>
+      <p style="color: var(--text-muted); max-width: 650px;">
+        Working with selected creators and operators to turn existing audiences into sustainable businesses.
+      </p>
+
+      <div class="metrics-row">
+        <div class="metric-item">
+          <h3>10M+</h3>
+          <p>Combined Audience Reach</p>
+        </div>
+        <div class="metric-item">
+          <h3>200M+</h3>
+          <p>Monthly Views</p>
+        </div>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: -1.5rem; margin-bottom: 3rem;">
+        *Current operational partnership with the owner/operator of a multi-million reach creator network.
+      </p>
+
+      <h4 class="brand-font" style="margin-bottom: 1.5rem;">Core Operational Capabilities</h4>
+      <div class="capabilities-grid">
+        <div class="cap-item"><span class="cap-num">01</span><strong>Positioning</strong></div>
+        <div class="cap-item"><span class="cap-num">02</span><strong>Product Ideation</strong></div>
+        <div class="cap-item"><span class="cap-num">03</span><strong>Monetisation</strong></div>
+        <div class="cap-item"><span class="cap-num">04</span><strong>Content Strategy</strong></div>
+        <div class="cap-item"><span class="cap-num">05</span><strong>Sales Funnels</strong></div>
+        <div class="cap-item"><span class="cap-num">06</span><strong>Community</strong></div>
+        <div class="cap-item"><span class="cap-num">07</span><strong>Launches</strong></div>
+        <div class="cap-item"><span class="cap-num">08</span><strong>Operations</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE APPROACH -->
+  <section class="section-padding" style="background: var(--surface-color);">
+    <div class="container">
+      <span class="tag">Philosophy</span>
+      <h2>Build things worth building.</h2>
+
+      <div class="principles-grid">
+        <div class="principle-card">
+          <h4>01 — Long Term</h4>
+          <p>Build for years, not attention cycles.</p>
+        </div>
+        <div class="principle-card">
+          <h4>02 — Substance</h4>
+          <p>Attention matters. What you do with it matters more.</p>
+        </div>
+        <div class="principle-card">
+          <h4>03 — Trust</h4>
+          <p>Protect the audience before chasing the transaction.</p>
+        </div>
+        <div class="principle-card">
+          <h4>04 — Purpose</h4>
+          <p>Build businesses that create genuine value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRENTLY BUILDING (TIMELINE) -->
+  <section class="section-padding">
+    <div class="container">
+      <span class="tag">Status & Trajectory</span>
+      <h2>Currently Building</h2>
+
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <span class="timeline-phase">Now</span>
+          <h4>Falah Pill</h4>
+          <p>Building the audience, message, and foundation.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Now</span>
+          <h4>Creator Partnerships</h4>
+          <p>Helping selected creators turn audiences into businesses.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Building</span>
+          <h4>Falah Collective</h4>
+          <p>Developing the wider umbrella ecosystem.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-phase">Later</span>
+          <h4>Learn Falah</h4>
+          <p>Developing an education and community platform for lifelong Muslim development.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT (PLACEHOLDER ARCHITECTURE) -->
+  <section id="impact" class="section-padding">
+    <div class="container">
+      <span class="tag">Long-Term Vision</span>
+      <h2>Built to matter.</h2>
+      <p style="color: var(--text-muted); max-width: 600px;">
+        The goal isn't simply to build companies. It's to build things that leave people better than we found them.
+      </p>
+
+      <div class="impact-placeholder">
+        <p>"The story is still being written."</p>
+        <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 0.5rem;">
+          Metrics, communities built, and charitable ventures will be documented here as proof is established.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SHA -->
+  <section id="about" class="section-padding" style="background: var(--surface-color);">
+    <div class="container about-wrapper">
+      <span class="tag">Behind the Collective</span>
+      <h2>About SHA</h2>
+      <div class="about-bio" style="margin-top: 2rem;">
+        <p>
+          I'm SHA — a founder/operator building Falah Collective from the ground up.
+        </p>
+        <p>
+          What started with individual projects is becoming something larger: a collection of brands, companies, and ventures built around meaningful work.
+        </p>
+        <p>
+          I'm interested in the intersection of entrepreneurship, media, education, creator businesses, and purpose — building in public where it makes sense, while keeping the work itself ahead of the noise.
+        </p>
+      </div>
+
+      <div class="ig-quote-box">
+        <div>
+          <blockquote>
+            "If your life was a book — what would you call this chapter?<br>
+            This is your story. You write the ending."
+          </blockquote>
+        </div>
+        <a href="https://instagram.com/shabir_husain_ahmed" target="_blank" class="btn-cta" style="white-space: nowrap;">@shabir_husain_ahmed</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / WORK WITH ME -->
+  <section id="contact" class="section-padding">
+    <div class="container" style="max-width: 800px;">
+      <span class="tag">Inquiries</span>
+      <h2>Have something worth building?</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">
+        Selectively open to working with creators, operators, experts, and businesses where there is a strong fit.
+      </p>
+
+      <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Inquiry received.');">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" required placeholder="Your full name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required placeholder="your.name@domain.com" />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="social">Instagram / Website</label>
+          <input type="text" id="social" placeholder="@handle or https://" />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="interest">Nature of Inquiry</label>
+          <select id="interest">
+            <option>Creator partnership</option>
+            <option>Business collaboration</option>
+            <option>Brand / venture</option>
+            <option>Investment / partnership</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" required placeholder="Details regarding your project or interest..."></textarea>
+        </div>
+
+        <div class="form-submit-btn">
+          <button type="submit" class="btn-cta" style="width: 100%;">Submit Inquiry</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            SHA
+            <span>FALAH COLLECTIVE</span>
+          </div>
+          <p>"Building a network that makes a difference."</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="https://instagram.com/shabir_husain_ahmed" target="_blank">Instagram</a></li>
+          <li><a href="#collective">Falah Pill</a></li>
+          <li><a href="#collective">Falah Collective</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        &copy; SHA / Falah Collective. falahcollective.com. One life. Many chapters. One collective.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT FOR SUBTLE ANIMATION & SCROLL -->
+  <script>
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(8, 8, 10, 0.95)';
+        header.style.height = '75px';
+      } else {
+        header.style.background = 'rgba(8, 8, 10, 0.85)';
+        header.style.height = '90px';
+      }
+    });
+  </script>
+</body>
+</html>
