@@ -1,361 +1,231 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en-GB">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Falah Collective</title>
-<meta name="description" content="Strive for success in everything you take part in. Falah Collective is the name over the things being built.">
+<title>Falah</title>
+<meta name="description" content="Falah is the Arabic word for success. It is the name of this chapter.">
 <link rel="canonical" href="https://falahcollective.com/">
-<meta name="theme-color" content="#08080a">
+<meta name="theme-color" content="#0d0f17">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://falahcollective.com/">
-<meta property="og:title" content="Falah Collective">
-<meta property="og:description" content="Strive for success in everything you take part in.">
+<meta property="og:title" content="Falah">
+<meta property="og:description" content="If your life was a book, what would you name this chapter?">
 <meta property="og:site_name" content="Falah Collective">
 <meta property="og:image" content="https://falahcollective.com/og-image.png">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="420">
-<meta property="og:image:alt" content="Falah — Strive for success in everything you take part in.">
+<meta property="og:image:alt" content="Falah. Strive for success in everything you take part in.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Falah Collective">
-<meta name="twitter:description" content="Strive for success in everything you take part in.">
+<meta name="twitter:title" content="Falah">
+<meta name="twitter:description" content="If your life was a book, what would you name this chapter?">
 <meta name="twitter:image" content="https://falahcollective.com/og-image.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308080a'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23c19a5b' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0f17'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23d8b57a' stroke-width='1.5'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Literata:ital,opsz,wght@0,7..72,300..500;1,7..72,300..400&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js')</script>
 
 <style>
+  /*
+    One chapter, read from night to dawn. The page background is a single
+    gradient the length of the document, so scrolling is the sunrise.
+    Gold is kept for Arabic only; every English word is in paper.
+  */
   :root{
-    --ink:#08080a;
-    --ink-2:#0c0c0f;
-    --paper:#ece8e0;
-    --muted:#8d8a85;
-    --faint:#56534e;
-    --gold:#c19a5b;
-    --gold-soft:#9a7b44;
-    --gold-lit:#e0c188;
-    --rule:rgba(236,232,224,.10);
-    --rule-gold:rgba(193,154,91,.22);
-    --display:'Fraunces',Georgia,serif;
-    --sans:'Instrument Sans',system-ui,sans-serif;
+    --night:#0d0f17;
+    --indigo:#181b2e;
+    --dawn:#33263a;
+    --ember:#55301f;
+    --paper:#f1ebe1;
+    --muted:#bcb5ac;
+    --gold:#e2c48e;
+    --gold-deep:#b8925a;
+
+    --latin:'Literata',Georgia,serif;
     --arabic:'Aref Ruqaa','Times New Roman',serif;
     --ease:cubic-bezier(.16,1,.3,1);
-    --gut:clamp(1.5rem,5vw,4rem);
+    --measure:31rem;
+    --gut:max(1.25rem,env(safe-area-inset-left));
   }
 
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  html{background:var(--ink);color:var(--paper);-webkit-text-size-adjust:100%}
+  html{background:var(--night);color:var(--paper);-webkit-text-size-adjust:100%}
   body{
-    font-family:var(--sans);font-weight:400;
-    font-size:clamp(1rem,.95rem + .2vw,1.075rem);
-    line-height:1.65;letter-spacing:-.005em;
-    background:var(--ink);overflow-x:hidden;
+    font-family:var(--latin);font-weight:350;font-optical-sizing:auto;
+    font-size:clamp(1.125rem,1.05rem + .3vw,1.25rem);line-height:1.7;
+    background:linear-gradient(to bottom,
+      var(--night) 0%, var(--night) 24%,
+      var(--indigo) 46%,
+      var(--dawn) 70%,
+      var(--ember) 100%);
+    min-height:100vh;overflow-x:hidden;position:relative;
     -webkit-font-smoothing:antialiased;
   }
-
-  ::selection{background:rgba(193,154,91,.24);color:var(--paper)}
-
-  a{color:inherit;text-decoration:none}
-  :focus-visible{outline:1px solid var(--gold);outline-offset:4px;border-radius:1px}
-
-  h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em}
-
-  .ar{font-family:var(--arabic);direction:rtl;unicode-bidi:isolate}
-
-  /* ---------- shell ---------- */
-  .shell{max-width:1360px;margin:0 auto;padding:0 var(--gut)}
-  .col{max-width:34rem}
-  section{position:relative}
-
-  /* ---------- chapter rail (desktop) ---------- */
-  .rail{
-    position:fixed;left:var(--gut);top:50%;transform:translateY(-50%);
-    z-index:20;display:flex;flex-direction:column;gap:.85rem;
-    font-family:var(--arabic);font-size:.9rem;color:var(--faint);
-    opacity:0;transition:opacity .8s var(--ease);
+  /* the sun just under the horizon, behind the last screen and the footer */
+  body::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:110vh;
+    background:radial-gradient(ellipse 95% 45% at 50% 100%,rgba(240,170,105,.24),transparent 75%);
+    pointer-events:none;
   }
-  .rail.on{opacity:1}
-  .rail i{font-style:normal;opacity:.3;transition:opacity .5s var(--ease),color .5s var(--ease)}
-  .rail i.here{opacity:1;color:var(--gold)}
-  @media(max-width:1180px){.rail{display:none}}
+  main,footer{position:relative;z-index:1}
 
-  /* ---------- progress ---------- */
-  .prog{position:fixed;top:0;left:0;height:1px;width:0;background:var(--gold);z-index:40;opacity:.55}
+  ::selection{background:rgba(226,196,142,.28);color:var(--paper)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 
-  /* ---------- wordmark ---------- */
-  .wm{
-    position:fixed;top:var(--gut);left:var(--gut);z-index:20;
-    font-family:var(--display);font-style:italic;font-size:.9rem;
-    color:var(--faint);opacity:0;transition:opacity 1s var(--ease) .3s;
-  }
-  .wm.on{opacity:1}
-  @media(max-width:1180px){.wm{top:max(1.35rem,env(safe-area-inset-top));left:max(1.35rem,env(safe-area-inset-left));font-size:.82rem}}
+  [lang="ar"]{font-family:var(--arabic);color:var(--gold);font-weight:400}
 
-  /* ---------- opening ---------- */
-  .open{min-height:100svh;display:grid;place-items:center;text-align:center;padding:7rem var(--gut) 6rem}
-  .open-in>*{opacity:0}
-  .open-ar{
-    font-family:var(--arabic);color:var(--gold-lit);line-height:1.15;
-    font-size:clamp(3.6rem,17vw,9.5rem);
-    animation:rise 2.2s var(--ease) .35s forwards;
+  /* ---------- the title page ---------- */
+  .title{
+    position:relative;
+    min-height:100vh;min-height:100svh;
+    display:grid;place-items:center;text-align:center;
+    padding:4rem var(--gut) 7rem;
+    background:radial-gradient(ellipse 60% 45% at 50% 42%,rgba(226,196,142,.07),transparent 70%);
   }
-  .open-lat{
-    margin-top:clamp(1.1rem,3vw,2rem);
-    font-family:var(--display);font-style:italic;font-weight:300;
-    font-size:clamp(1.35rem,5vw,2.1rem);letter-spacing:.01em;color:var(--paper);
-    animation:rise 1.6s var(--ease) 1.5s forwards;
+  .title h1{display:flex;flex-direction:column;align-items:center;font-weight:inherit}
+  .title .word{
+    font-weight:700;line-height:1.5;
+    font-size:clamp(5rem,26vw,11.5rem);
+    /* the mask clips to this box, and the tail of the ha drops .09em below
+       the line, so the bottom padding keeps the whole letter inside it */
+    padding:0 .3em .15em;
   }
-  .open-line{
-    width:1px;height:clamp(2rem,5vw,3.25rem);background:linear-gradient(var(--gold-soft),transparent);
-    margin:clamp(1.75rem,4vw,2.75rem) auto;
-    animation:rise 1.4s var(--ease) 2.3s forwards;transform-origin:top;
+  .title .latin{
+    margin-top:.1em;
+    font-weight:300;letter-spacing:.01em;
+    font-size:clamp(1.9rem,8vw,3rem);line-height:1.1;
   }
-  .open-say{
-    max-width:26rem;margin:0 auto;
-    font-family:var(--display);font-weight:300;
-    font-size:clamp(1.05rem,4.2vw,1.4rem);line-height:1.5;
-    animation:rise 1.6s var(--ease) 2.7s forwards;
+  .title .stroke{
+    display:block;width:1px;height:clamp(2.5rem,7vh,3.5rem);
+    margin:clamp(1.25rem,3.5vh,1.75rem) 0;
+    background:linear-gradient(var(--gold-deep),transparent);
+    transform-origin:top;
   }
-  .cue{
-    position:absolute;left:0;right:0;bottom:max(clamp(1.75rem,5vh,2.75rem),env(safe-area-inset-bottom));
-    text-align:center;
-    font-size:.66rem;letter-spacing:.28em;color:var(--faint);opacity:0;
-    animation:rise 1.4s var(--ease) 3.6s forwards;
+  .title .gloss{
+    font-style:italic;font-weight:300;
+    font-size:clamp(1.35rem,5.2vw,1.9rem);line-height:1.2;
   }
-  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
-  /* ---------- chapter heads ---------- */
-  .ch{display:flex;align-items:baseline;gap:1rem;margin-bottom:clamp(2.5rem,6vw,4rem)}
-  .ch b{font-family:var(--arabic);font-weight:400;font-size:1.15rem;color:var(--gold-soft)}
-  .ch span{font-size:.7rem;letter-spacing:.22em;color:var(--faint)}
-
-  h2.big{
-    font-size:clamp(2rem,7vw,3.4rem);line-height:1.1;letter-spacing:-.025em;
-    max-width:16ch;
+  .turn{
+    position:absolute;left:0;right:0;
+    bottom:max(2rem,calc(env(safe-area-inset-bottom) + 1rem));
+    font-style:italic;font-size:.95rem;color:var(--muted);
   }
 
-  /* ---------- I. meaning ---------- */
-  .why{padding:clamp(6rem,14vh,11rem) 0}
-  .why p{color:var(--muted);max-width:34rem;margin-top:1.4rem;font-size:1.05rem}
-  .why .turn{
-    margin-top:clamp(3rem,8vw,5rem);
-    font-family:var(--display);font-weight:300;color:var(--paper);
-    font-size:clamp(1.4rem,5.5vw,2.4rem);line-height:1.35;max-width:18ch;
+  /* One orchestrated entrance. The Arabic is inked in right to left, the way
+     it is written, then the reading and the meaning follow. It waits for the
+     calligraphy face so the fallback font is never the thing animated. */
+  .js .title .word,.js .title .latin,.js .title .stroke,.js .title .gloss,.js .turn{opacity:0}
+  .js.ready .title .word{
+    opacity:1;
+    -webkit-mask-image:linear-gradient(to left,#000 40%,transparent 60%);
+            mask-image:linear-gradient(to left,#000 40%,transparent 60%);
+    -webkit-mask-size:300% 100%;mask-size:300% 100%;
+    -webkit-mask-position:0 0;mask-position:0 0;
+    animation:ink 1.9s cubic-bezier(.45,.05,.3,1) .2s forwards;
   }
-  .why .turn em{font-style:italic;color:var(--gold-lit)}
+  .js.ready .title .latin{animation:show 1.2s var(--ease) 1.6s forwards}
+  .js.ready .title .stroke{animation:draw 1s var(--ease) 2.2s forwards}
+  .js.ready .title .gloss{animation:show 1.2s var(--ease) 2.7s forwards}
+  .js.ready .turn{animation:show 1.2s var(--ease) 3.6s forwards}
+  @keyframes ink{
+    to{-webkit-mask-position:100% 0;mask-position:100% 0}
+  }
+  @keyframes show{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes draw{from{opacity:1;transform:scaleY(0)}to{opacity:1;transform:scaleY(1)}}
 
-  .root{
-    margin-top:clamp(4rem,10vw,6.5rem);padding-top:2rem;
-    border-top:1px solid var(--rule);
-    display:flex;flex-wrap:wrap;align-items:baseline;gap:1.5rem 2.5rem;
-  }
-  .root-glyphs{display:flex;gap:1.25rem}
-  .root-glyphs i{
-    font-family:var(--arabic);font-style:normal;font-size:1.9rem;color:var(--gold);
-    opacity:0;transform:translateY(8px);
-    transition:opacity .8s var(--ease),transform .8s var(--ease);
-  }
-  .in .root-glyphs i:nth-child(1){transition-delay:.05s}
-  .in .root-glyphs i:nth-child(2){transition-delay:.22s}
-  .in .root-glyphs i:nth-child(3){transition-delay:.39s}
-  .in .root-glyphs i{opacity:1;transform:translateY(0)}
-  .root-say{font-size:.88rem;color:var(--faint);max-width:26rem}
+  /* ---------- the chapter ---------- */
+  .page{padding:clamp(4.5rem,12vh,8rem) var(--gut)}
+  .page > *{max-width:var(--measure);margin-left:auto;margin-right:auto}
+  .page p + p{margin-top:1.1em}
 
-  /* ---------- II. the call ---------- */
-  .call{
-    padding:clamp(6rem,14vh,11rem) 0;
-    background:var(--tone,var(--ink));
-    transition:background 1.6s var(--ease);
-    border-top:1px solid var(--rule);
+  h2,.pull,.rule{text-wrap:balance}
+  p{text-wrap:pretty}
+  h2{
+    font-weight:300;letter-spacing:-.015em;
+    font-size:clamp(1.85rem,7vw,2.75rem);line-height:1.2;
+    margin-bottom:1.4rem;
   }
-  .call-top{text-align:center;max-width:38rem;margin:0 auto}
-  .call-ar{
-    font-family:var(--arabic);color:var(--gold-lit);
-    font-size:clamp(1.9rem,8vw,3.5rem);line-height:1.4;
-  }
-  .call-tr{margin-top:1.1rem;font-size:.85rem;letter-spacing:.14em;color:var(--muted)}
-  .call-en{
-    margin-top:.5rem;font-family:var(--display);font-style:italic;
-    font-size:clamp(1.2rem,4.5vw,1.7rem);color:var(--paper);
-  }
-  .call-note{
-    margin:clamp(3rem,7vw,4.5rem) auto 0;max-width:30rem;text-align:center;
-    color:var(--muted);font-size:1.02rem;
-  }
-  .call-note b{color:var(--paper);font-weight:400;font-family:var(--display);font-style:italic}
-
-  .day{margin-top:clamp(4rem,10vw,7rem);border-top:1px solid var(--rule)}
-  .hour{
-    display:grid;grid-template-columns:1.4rem 1fr auto;align-items:baseline;
-    gap:clamp(1rem,3vw,2rem);
-    padding:clamp(1.35rem,3.5vw,2rem) 0;
-    border-bottom:1px solid var(--rule);
-    opacity:.34;transition:opacity 1s var(--ease);
-  }
-  .hour.lit{opacity:1}
-  .hour i{font-family:var(--arabic);font-style:normal;font-size:.95rem;color:var(--gold-soft)}
-  .hour h3{
-    font-family:var(--display);font-weight:400;
-    font-size:clamp(1.35rem,5.5vw,2.35rem);letter-spacing:-.02em;
-  }
-  .hour span{font-size:.78rem;letter-spacing:.13em;color:var(--faint);white-space:nowrap}
-
-  .again{
-    margin-top:clamp(2.5rem,6vw,3.5rem);
-    font-family:var(--display);font-weight:300;font-size:clamp(1.15rem,4.5vw,1.6rem);
-    line-height:1.5;
-  }
-  .again em{font-style:italic;color:var(--gold-lit)}
-
-  /* ---------- III. collective ---------- */
-  .coll{padding:clamp(6rem,14vh,11rem) 0;border-top:1px solid var(--rule)}
-  .terr{margin-top:clamp(3rem,7vw,4.5rem);border-top:1px solid var(--rule)}
-  .terr a,.terr div.t{
-    display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:1.5rem;
-    padding:clamp(1.6rem,4vw,2.4rem) 0;border-bottom:1px solid var(--rule);
-  }
-  .terr h3{
-    font-family:var(--sans);font-weight:500;
-    font-size:.78rem;letter-spacing:.2em;color:var(--gold);
-  }
-  .terr p{
-    margin-top:.55rem;font-family:var(--display);font-weight:300;
-    font-size:clamp(1.25rem,4.6vw,1.9rem);letter-spacing:-.02em;color:var(--paper);
-  }
-  .terr small{font-size:.75rem;letter-spacing:.1em;color:var(--faint);white-space:nowrap}
-  .withheld{margin-top:clamp(2.5rem,6vw,3.5rem);color:var(--faint);font-size:.92rem;max-width:30rem}
-
-  /* ---------- IV. build ---------- */
-  .build{padding:clamp(6rem,14vh,11rem) 0;background:var(--ink-2);border-top:1px solid var(--rule)}
-  .stages{margin-top:clamp(3rem,7vw,4.5rem);display:grid;gap:0}
-  .stage{
-    display:grid;grid-template-columns:auto 1fr;gap:clamp(1.25rem,4vw,2.5rem);
-    padding:clamp(1.75rem,4vw,2.5rem) 0;border-top:1px solid var(--rule);
-  }
-  .stage:last-child{border-bottom:1px solid var(--rule)}
-  .dot{
-    width:7px;height:7px;border-radius:50%;margin-top:.7rem;
-    background:transparent;border:1px solid var(--gold-soft);
-    transition:background .9s var(--ease);
-  }
-  .stage.done .dot{background:var(--gold)}
-  .stage h3{font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.2em;color:var(--gold)}
-  .stage p{margin-top:.6rem;font-family:var(--display);font-weight:300;font-size:clamp(1.15rem,4.2vw,1.65rem);color:var(--paper)}
-
-  /* ---------- V. public ---------- */
-  .pub{padding:clamp(6rem,16vh,12rem) 0;border-top:1px solid var(--rule)}
-  .beat{
-    font-family:var(--display);font-weight:300;line-height:1.3;
-    font-size:clamp(1.5rem,6vw,2.8rem);letter-spacing:-.025em;
-    max-width:20ch;
-  }
-  .beat + .beat{margin-top:clamp(1.75rem,4vw,2.5rem)}
-  .beat.gold{color:var(--gold-lit)}
-  .pub .tail{margin-top:clamp(3rem,7vw,4rem);color:var(--muted);max-width:32rem}
-
-  /* ---------- VI. standard ---------- */
-  .std{border-top:1px solid var(--rule)}
-  .std .shell{padding-top:clamp(6rem,14vh,11rem)}
-  .rule-set{margin-top:clamp(3rem,8vw,5rem)}
-  .rule{
-    padding:clamp(3rem,9vw,6rem) 0;border-top:1px solid var(--rule);
-    display:grid;grid-template-columns:1fr;gap:.5rem;
-  }
-  .rule:last-child{border-bottom:1px solid var(--rule)}
-  .rule b{
-    display:block;font-family:var(--display);font-weight:400;
-    font-size:clamp(2.6rem,13vw,7rem);line-height:.94;letter-spacing:-.04em;
-    color:var(--paper);
-  }
-  .rule span{
-    font-family:var(--display);font-style:italic;font-weight:300;
-    font-size:clamp(1.1rem,4.5vw,1.9rem);color:var(--gold-soft);
-    padding-left:.15em;
+  .page .pull{
+    margin-top:2.5rem;
+    font-weight:300;letter-spacing:-.01em;
+    font-size:clamp(1.45rem,5.4vw,2rem);line-height:1.35;
   }
 
-  /* ---------- VII. behind ---------- */
-  .behind{padding:clamp(6rem,14vh,11rem) 0;background:var(--ink-2);border-top:1px solid var(--rule)}
-  .behind .said{
-    font-family:var(--display);font-weight:300;
-    font-size:clamp(1.6rem,6.5vw,3rem);letter-spacing:-.025em;
+  hr{
+    border:0;width:1px;height:4rem;margin:0 auto;
+    background:linear-gradient(transparent,var(--gold-deep),transparent);
   }
-  .behind p{margin-top:clamp(1.75rem,4vw,2.25rem);color:var(--muted);max-width:31rem}
 
-  .who{margin-top:clamp(3rem,7vw,4rem);padding-top:1.75rem;border-top:1px solid var(--rule)}
-  .who button{
-    font:inherit;background:none;border:0;padding:0;cursor:pointer;
-    font-size:.9rem;color:var(--faint);
-    border-bottom:1px solid var(--rule-gold);padding-bottom:.3rem;
-    transition:color .4s var(--ease);text-align:left;
+  /* the root */
+  .root{margin:2.75rem auto;text-align:center}
+  .root .letters{
+    display:flex;justify-content:center;gap:1.6rem;
+    font-size:clamp(3rem,12vw,4.25rem);line-height:1.3;
   }
-  .who button:hover{color:var(--gold)}
-  .who .card{
-    display:grid;grid-template-rows:0fr;opacity:0;
-    transition:grid-template-rows .8s var(--ease),opacity .8s var(--ease);
-  }
-  .who.open .card{grid-template-rows:1fr;opacity:1}
-  .who .card>div{overflow:hidden}
-  .who .name{
-    padding-top:1.5rem;font-family:var(--display);font-style:italic;
-    font-size:clamp(1.3rem,5vw,1.9rem);color:var(--gold-lit);
-  }
-  .who .ig{
-    display:inline-block;margin-top:.85rem;font-size:.85rem;color:var(--muted);
-    border-bottom:1px solid var(--rule-gold);padding-bottom:.25rem;
-    transition:color .4s var(--ease),border-color .4s var(--ease);
-  }
-  .who .ig:hover{color:var(--gold-lit);border-color:var(--gold-lit)}
-  .who.open button{color:var(--faint);opacity:.5}
+  .page .root .letters + p{margin-top:.6rem;font-size:.95em;color:var(--muted)}
 
-  /* ---------- whofoot: the name reveal, just above the footer ---------- */
-  .whofoot{padding:0 0 clamp(3.5rem,8vw,5rem);text-align:center}
-  .whofoot .who{
-    display:inline-block;margin-top:0;padding-top:clamp(2.5rem,6vw,3.5rem);
-    border-top:1px solid var(--rule);
-  }
-  .whofoot .who button{text-align:center}
+  /* the call */
+  .call{text-align:center}
+  .call h2{margin-bottom:2.5rem}
+  .adhan{list-style:none;display:grid;gap:1.75rem}
+  .adhan [lang="ar"]{display:block;font-size:clamp(2rem,9vw,3rem);line-height:1.5}
+  .adhan .say{display:block;font-style:italic;font-size:1.05em}
+  .adhan .first [lang="ar"],.adhan .first .say{opacity:.55}
+  .adhan small{display:block;font-size:.8em;color:var(--muted);margin-top:.1rem}
+  .call .after{margin-top:2.5rem}
 
-  /* ---------- epilogue ---------- */
-  .end{
-    min-height:100svh;display:grid;place-items:center;text-align:center;
-    padding:clamp(6rem,14vh,10rem) var(--gut);border-top:1px solid var(--rule);
+  /* everything */
+  .everything{list-style:none;margin:2rem auto 2.25rem}
+  .everything li{
+    font-style:italic;font-weight:300;
+    font-size:clamp(1.6rem,6.4vw,2.3rem);line-height:1.3;
+    padding:.35rem 0;
   }
-  .end q{
-    display:block;quotes:none;
-    font-family:var(--display);font-weight:300;
-    font-size:clamp(1.75rem,7.5vw,4rem);line-height:1.2;letter-spacing:-.03em;
-    max-width:14ch;margin:0 auto;
+  .page .setup{margin-top:2.75rem;font-style:italic;color:var(--muted)}
+  .page .rule{
+    margin-top:.6rem;
+    font-weight:300;letter-spacing:-.02em;
+    font-size:clamp(1.9rem,7.6vw,3rem);line-height:1.18;
   }
-  .end .write{
-    margin-top:clamp(3rem,9vw,5.5rem);
-    font-family:var(--display);font-style:italic;
-    font-size:clamp(1.2rem,4.8vw,1.9rem);color:var(--gold-lit);
+
+  /* the question */
+  .ask{
+    min-height:100vh;min-height:100svh;
+    display:grid;place-content:center;text-align:center;
+    padding:clamp(5rem,14vh,8rem) var(--gut);
   }
-  .sig{margin-top:clamp(5rem,14vw,9rem)}
-  .sig .ar{font-family:var(--arabic);font-size:clamp(1.5rem,6vw,2.2rem);color:var(--gold-soft);opacity:.75}
+  .ask .lead{color:var(--muted);font-style:italic;margin-bottom:1.5rem}
+  .ask h2{
+    max-width:15ch;margin:0 auto;
+    font-size:clamp(2.1rem,8.6vw,3.9rem);line-height:1.14;letter-spacing:-.025em;
+  }
+  .reply{
+    display:inline-block;margin-top:clamp(2.5rem,7vh,3.5rem);
+    padding:1rem 1.6rem;
+    border:1px solid rgba(241,235,225,.5);border-radius:2px;
+    font-size:1.05rem;text-decoration:none;
+    transition:background-color .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease);
+  }
+  .reply:hover{background:var(--paper);color:var(--ember);border-color:var(--paper)}
+  .ask .handle{margin-top:.9rem;font-size:.9rem;color:var(--muted)}
 
-  footer{padding:clamp(3rem,7vw,4rem) 0 clamp(2.5rem,5vw,3rem);border-top:1px solid var(--rule)}
-  footer .shell{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;flex-wrap:wrap}
-  footer span{font-size:.75rem;color:var(--faint);letter-spacing:.05em}
+  footer{
+    text-align:center;font-size:.85rem;color:var(--muted);
+    padding:0 var(--gut) max(2.25rem,calc(env(safe-area-inset-bottom) + 1rem));
+  }
+  footer [lang="ar"]{display:block;font-size:1.6rem;margin-bottom:.35rem;opacity:.8}
 
-  /* ---------- reveal ---------- */
-  .r{opacity:0;transform:translateY(20px);transition:opacity 1.05s var(--ease),transform 1.05s var(--ease)}
-  .r.in{opacity:1;transform:none}
-  .r2>*{opacity:0;transform:translateY(16px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
-  .r2.in>*{opacity:1;transform:none}
-  .r2.in>*:nth-child(1){transition-delay:.04s}
-  .r2.in>*:nth-child(2){transition-delay:.16s}
-  .r2.in>*:nth-child(3){transition-delay:.28s}
-  .r2.in>*:nth-child(4){transition-delay:.40s}
-  .r2.in>*:nth-child(5){transition-delay:.52s}
-
-  @media(prefers-reduced-motion:reduce){
-    *{animation-duration:.01ms !important;animation-delay:0ms !important;transition-duration:.01ms !important}
-    .open-in>*,.r,.r2>*,.root-glyphs i{opacity:1 !important;transform:none !important}
-    .hour{opacity:1}
-    .call{transition:none}
+  @media (prefers-reduced-motion:reduce){
+    .js .title .word,.js .title .latin,.js .title .stroke,.js .title .gloss,.js .turn{
+      opacity:1;animation:none !important;
+      -webkit-mask-image:none !important;mask-image:none !important;
+    }
+    .reply{transition:none}
   }
 </style>
 
@@ -366,247 +236,95 @@
 </head>
 <body>
 
-<div class="prog" id="prog" style="width: 0%;"></div>
-<div class="wm" id="wm">Falah Collective</div>
-
-<nav class="rail" id="rail" aria-hidden="true">
-  <i data-ch="0">١</i><i data-ch="1">٢</i><i data-ch="2">٣</i>
-  <i data-ch="3">٤</i><i data-ch="4">٥</i><i data-ch="5">٦</i><i data-ch="6">٧</i>
-</nav>
-
 <main>
 
-  <!-- OPENING -->
-  <section class="open">
-    <div class="open-in">
-      <h1 class="open-ar ar" lang="ar" dir="rtl">الفلاح</h1>
-      <p class="open-lat">Falah</p>
-      <div class="open-line" aria-hidden="true"></div>
-      <p class="open-say">Strive for success in everything you take part in.</p>
+  <header class="title">
+    <h1>
+      <span class="word" lang="ar" dir="rtl">الفلاح</span>
+      <span class="latin">Falah</span>
+      <span class="stroke" aria-hidden="true"></span>
+      <span class="gloss">success</span>
+    </h1>
+    <p class="turn">Turn the page</p>
+  </header>
+
+  <section class="page">
+    <h2>I named this chapter Falah.</h2>
+    <p>It's the Arabic word for success. And the word grows out of farming.</p>
+
+    <div class="root">
+      <p class="letters" lang="ar" dir="rtl" aria-label="Fa, lam, ha"><span>ف</span><span>ل</span><span>ح</span></p>
+      <p>The same three letters give you <i>fallah</i>, a farmer, and <i>falah</i>, success.</p>
     </div>
-    <div class="cue" aria-hidden="true">SCROLL</div>
+
+    <p>A farmer splits hard ground. Plants. Waters. Waits.</p>
+    <p>Most days, nothing shows for it. They come back the next day anyway.</p>
+    <p class="pull">So falah isn't a place you arrive at. It's something you keep returning to.</p>
   </section>
 
-  <!-- I -->
-  <section class="why" data-ch="0">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">١</b><span>WHY FALAH</span></div>
-      <h2 class="big r">Success, before anyone made it mean money.</h2>
-      <div class="col">
-        <p class="r">Falah is an Arabic word for success. Its root belongs to farmers. It means to split open the earth, work it, and wait for it to give something back.</p>
-        <p class="r">Nothing about that is fast. You plant. You tend it. You come back the next day and do it again, mostly without proof that it's working.</p>
-      </div>
-      <p class="turn r">So falah isn't something you arrive at. <em>It's something you return to.</em></p>
+  <hr>
 
-      <div class="root r">
-        <div class="root-glyphs" aria-hidden="true"><i>ح</i><i>ل</i><i>ف</i></div>
-        <p class="root-say">The three letters underneath the word. Every meaning it carries grows out of them.</p>
-      </div>
-    </div>
+  <section class="page call">
+    <h2>This word is called out five times a day.</h2>
+    <ol class="adhan">
+      <li class="first">
+        <span lang="ar" dir="rtl">حَيَّ عَلَى الصَّلَاة</span>
+        <span class="say">Come to prayer.</span>
+      </li>
+      <li>
+        <span lang="ar" dir="rtl">حَيَّ عَلَى الْفَلَاح</span>
+        <span class="say">Come to success.</span>
+        <small>Hayya ‘ala al-falah</small>
+      </li>
+    </ol>
+    <p class="after">Two lines of the call to prayer, one straight after the other. Prayer first, then success.</p>
   </section>
 
-  <!-- II -->
-  <section class="call" id="call" data-ch="1">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">٢</b><span>THE CALL</span></div>
+  <hr>
 
-      <div class="call-top r">
-        <p class="call-ar ar" lang="ar" dir="rtl">حَيَّ عَلَى الْفَلَاح</p>
-        <p class="call-tr">Hayya 'ala al-Falah</p>
-        <p class="call-en">Come to success.</p>
-      </div>
-
-      <p class="call-note r">It's called out from every mosque on earth, five times a day, and has been for fourteen centuries. Not <b>come and pray.</b> Come to success.</p>
-
-      <div class="day r2">
-        <div class="hour" data-tone="#0a0a10"><i class="ar" lang="ar" dir="rtl">١</i><h3>Fajr</h3><span>DAWN</span></div>
-        <div class="hour" data-tone="#101014"><i class="ar" lang="ar" dir="rtl">٢</i><h3>Dhuhr</h3><span>MIDDAY</span></div>
-        <div class="hour" data-tone="#121013"><i class="ar" lang="ar" dir="rtl">٣</i><h3>Asr</h3><span>AFTERNOON</span></div>
-        <div class="hour" data-tone="#120d0d"><i class="ar" lang="ar" dir="rtl">٤</i><h3>Maghrib</h3><span>SUNSET</span></div>
-        <div class="hour" data-tone="#08080a"><i class="ar" lang="ar" dir="rtl">٥</i><h3>Isha</h3><span>NIGHT</span></div>
-      </div>
-
-      <p class="again r">Success is calling you.<br>Five times a day.<br>It'll be back again tomorrow.<br><em>Would you miss the call?</em></p>
-    </div>
+  <section class="page">
+    <h2>For years I measured success too narrowly.</h2>
+    <p>I studied business, money and the internet. I wanted to build wealth without giving up what I believe. I found some of it.</p>
+    <p>Then I saw what I'd left out.</p>
+    <ul class="everything">
+      <li>Faith.</li>
+      <li>Character.</li>
+      <li>Family.</li>
+      <li>The people you affect.</li>
+      <li>The person you become.</li>
+    </ul>
+    <p>I've fallen more than I'd like to admit. What I've learned is that falling isn't the end. You return.</p>
+    <p class="setup">So this chapter has one rule.</p>
+    <p class="rule">Strive for success in everything you take part in.</p>
   </section>
 
-  <!-- III -->
-  <section class="coll" data-ch="2">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">٣</b><span>THE COLLECTIVE</span></div>
-      <h2 class="big r">The name over the things being built.</h2>
-
-      <div class="terr r2">
-        <div class="t"><div><h3>MEDIA</h3><p>Ideas that move.</p></div><small>LIVE</small></div>
-        <div class="t"><div><h3>EDUCATION</h3><p>Knowledge that compounds.</p></div><small>IN PROGRESS</small></div>
-        <div class="t"><div><h3>ENTERPRISE</h3><p>Things built to last.</p></div><small>HELD</small></div>
-      </div>
-
-      <p class="withheld r">Three territories. Nine or so things inside them. You'll get the names when the names are earned.</p>
-    </div>
-  </section>
-
-  <!-- IV -->
-  <section class="build" data-ch="3">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">٤</b><span>THE BUILD</span></div>
-      <div class="stages r2">
-        <div class="stage done"><span class="dot" aria-hidden="true"></span><div><h3>FOUNDATION</h3><p>The standard is settled.</p></div></div>
-        <div class="stage done"><span class="dot" aria-hidden="true"></span><div><h3>BUILDING</h3><p>The first things are taking shape.</p></div></div>
-        <div class="stage"><span class="dot" aria-hidden="true"></span><div><h3>REVEAL</h3><p>When they're ready, they'll have names.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- V -->
-  <section class="pub" data-ch="4">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">٥</b><span>WHY SO LITTLE IS PUBLIC</span></div>
-      <p class="beat r">The internet made being seen feel like progress.</p>
-      <p class="beat gold r">It isn't.</p>
-      <p class="tail r">Attention is the easiest thing to get and the hardest thing to spend well. Building loudly is a way of borrowing belief you haven't earned yet. So the work comes first here, and the audience comes later, if it comes at all.</p>
-    </div>
-  </section>
-
-  <!-- VI -->
-  <section class="std" data-ch="5">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">٦</b><span>THE STANDARD</span></div>
-      <div class="rule-set">
-        <div class="rule r"><b>LONG</b><span>over fast.</span></div>
-        <div class="rule r"><b>SUBSTANCE</b><span>over noise.</span></div>
-        <div class="rule r"><b>TRUST</b><span>before transaction.</span></div>
-        <div class="rule r"><b>PURPOSE</b><span>before profit.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VII -->
-  <section class="behind" data-ch="6">
-    <div class="shell">
-      <div class="ch r"><b class="ar" lang="ar" dir="rtl">٧</b><span>BEHIND IT</span></div>
-      <p class="said r">I'm building this.</p>
-      <p class="r">For years I studied business, money, and the internet, looking for a way to build wealth without compromising what I believe. I found some of it. Then I understood I'd been measuring success too narrowly. There's also faith, character, family, the people you affect, and the person you become along the way.</p>
-      <p class="r">I've fallen more than I'd like to admit. What I've learned is that falling isn't the end. You return.</p>
-      <p class="r">Falah is the standard I measure it against. Not things that make noise. Things that leave something behind.</p>
-    </div>
-  </section>
-
-  <!-- EPILOGUE -->
-  <section class="end">
-    <div>
-      <q class="r">If your life was a book, what would you call this chapter?</q>
-      <p class="write r">You write the ending.</p>
-      <div class="sig r"><span class="ar" lang="ar" dir="rtl">الفلاح</span></div>
-    </div>
-  </section>
-
-  <section class="whofoot">
-    <div class="shell">
-      <div class="who r" id="who">
-        <button type="button" id="whoBtn" aria-expanded="false" aria-controls="whoCard">Who's behind this?</button>
-        <div class="card" id="whoCard">
-          <div>
-            <p class="name">Shabir Husain Ahmed</p>
-            <a class="ig" href="https://www.instagram.com/shabir_husain_ahmed/" target="_blank" rel="noopener">@shabir_husain_ahmed</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="ask">
+    <p class="lead">That's the name of mine.</p>
+    <h2>If your life was a book, what would you name this chapter?</h2>
+    <p><a class="reply" href="https://www.instagram.com/shabir_husain_ahmed/" target="_blank" rel="noopener">Tell me yours on Instagram</a></p>
+    <p class="handle">@shabir_husain_ahmed</p>
   </section>
 
 </main>
 
 <footer>
-  <div class="shell">
-    <span>FALAH COLLECTIVE</span>
-    <span>falahcollective.com</span>
-  </div>
+  <span lang="ar" dir="rtl">الفلاح</span>
+  Falah Collective
 </footer>
 
 <script>
-(function(){
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var supported = 'IntersectionObserver' in window;
-
-  /* reveal */
-  var items = document.querySelectorAll('.r, .r2, .root');
-  if (supported) {
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(!e.isIntersecting) return;
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      });
-    },{threshold:.15, rootMargin:'0px 0px -8% 0px'});
-    items.forEach(function(el){ io.observe(el); });
-  } else {
-    items.forEach(function(el){ el.classList.add('in'); });
-  }
-
-  /* chapter rail */
-  var rail = document.getElementById('rail');
-  var marks = rail ? rail.querySelectorAll('i') : [];
-  var chapters = document.querySelectorAll('section[data-ch]');
-  if (supported && chapters.length) {
-    var chIo = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(!e.isIntersecting) return;
-        var n = e.target.getAttribute('data-ch');
-        for (var i=0;i<marks.length;i++){
-          marks[i].classList.toggle('here', marks[i].getAttribute('data-ch') === n);
-        }
-      });
-    },{threshold:0, rootMargin:'-45% 0px -45% 0px'});
-    chapters.forEach(function(s){ chIo.observe(s); });
-  }
-
-  /* the day: each prayer lights, section tone shifts */
-  var call = document.getElementById('call');
-  var hours = document.querySelectorAll('.hour');
-  if (supported && call && hours.length) {
-    var hIo = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(!e.isIntersecting) return;
-        e.target.classList.add('lit');
-        if(!reduce) call.style.setProperty('--tone', e.target.getAttribute('data-tone'));
-      });
-    },{threshold:.6});
-    hours.forEach(function(h){ hIo.observe(h); });
-  } else {
-    hours.forEach(function(h){ h.classList.add('lit'); });
-  }
-
-  /* founder */
-  var who = document.getElementById('who');
-  var btn = document.getElementById('whoBtn');
-  if (who && btn) {
-    btn.addEventListener('click', function(){
-      var open = who.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  /* progress + fixed chrome */
-  var prog = document.getElementById('prog');
-  var wm = document.getElementById('wm');
-  var tick = false;
-  function frame(){
-    var y = window.scrollY || document.documentElement.scrollTop;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    if (prog) prog.style.width = (h > 0 ? (y/h)*100 : 0) + '%';
-    var past = y > window.innerHeight * .6;
-    if (wm) wm.classList.toggle('on', past);
-    if (rail) rail.classList.toggle('on', past);
-    tick = false;
-  }
-  addEventListener('scroll', function(){
-    if(tick) return;
-    tick = true;
-    requestAnimationFrame(frame);
-  }, {passive:true});
-  frame();
-})();
+  // Start the title sequence once the calligraphy face is in, or after 1.5s
+  // at most, so a slow font never leaves the first screen blank.
+  (function () {
+    var root = document.documentElement;
+    var go = function () { root.classList.add('ready'); };
+    if (!document.fonts || !document.fonts.load) return go();
+    Promise.race([
+      document.fonts.load('700 1em "Aref Ruqaa"', 'الفلاح'),
+      new Promise(function (r) { setTimeout(r, 1500); })
+    ]).then(go, go);
+  })();
 </script>
 
-</body></html>
+</body>
+</html>
