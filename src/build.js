@@ -55,7 +55,7 @@ const [sx, sy] = at(86, R);
 const LABELS = ['Faith', 'Character', 'Family', 'The people you affect', 'The person you become'];
 let RINGDEFS = '', RINGS = '';
 LABELS.forEach((label, i) => {
-  const r = 80 + (i + 1) * 80, a = r + 10;
+  const r = 80 + (i + 1) * 72, a = r + 10;
   RINGDEFS += `<path id="ringArc${i}" d="M${500 - a} 500 A${a} ${a} 0 0 1 ${500 + a} 500"/>`;
   RINGS += `<circle class="draw ring" cx="500" cy="500" r="${r}"/>` +
     `<text class="ring-label"><textPath href="#ringArc${i}" startOffset="50%">${label}</textPath></text>`;
