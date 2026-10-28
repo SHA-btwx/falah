@@ -15,9 +15,14 @@ the top fills as you go, and every swipe or scroll lands on the next page.
 2. **The hook.** "Every chapter needs a name. I named mine Falah." A medallion
    draws itself around the name, and a promise sits under it: "At the end,
    you'll name yours."
-3. **The field.** The word comes from farming: split, plant, water, wait. Most
-   days nothing shows, the farmer comes back anyway, and one morning a sprout
-   breaks through
+3. **The field.** The word comes from farming, and each word does what it
+   says. *Split*: the ground is cut towards you and light runs down every
+   furrow. *Plant*: seeds drop in and ring where they land. *Water*: rain,
+   splashes, wet soil. *Wait*: days flash by over the field. Most days nothing
+   shows, but something glows under the soil. Footsteps come back to the spot.
+   Then one morning the ground cracks with light, the sprout rises, and the
+   whole field comes up in a wave. The field fades out just above the nudge,
+   so nothing in it ever sits under it
 4. **The root.** ف ل ح branch into *falaha* (to split the earth), *fallah*
    (a farmer) and *falah* (success). "So falah isn't a place you reach. It's a
    field you keep coming back to."

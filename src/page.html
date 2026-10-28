@@ -109,7 +109,7 @@
   .a{position:relative;width:100%;max-width:28rem}
   .a>svg{display:block;width:100%;height:auto;overflow:hidden}
   .s-title{min-height:100vh;min-height:100svh;justify-content:center;overflow-x:clip}
-  .bar,.nudge,.ripples,.net,.drops{display:none}
+  .bar,.nudge,.ripples,.net,.drops,.streaks,.f-rips,.splashes,.steps,.cracks,.shock,.pulse,.wet{display:none}
 
   /* ---------- the stage ---------- */
   .motion .stage{position:relative;height:100vh;height:100svh;overflow:hidden}
@@ -133,7 +133,10 @@
   .motion .t>*,.motion .b>*,.motion .m>*{grid-area:1/1}
   .motion .a>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   .motion .beat{opacity:0}
-  .motion .a.bleed{margin:0 calc(-1 * var(--gut)) calc(-1 * (var(--bot) + 1rem))}
+  /* The field runs edge to edge and fades out just above the nudge, so
+     nothing in it can ever sit under the nudge. */
+  .motion .a.bleed{width:auto;margin:0 calc(-1 * var(--gut))}
+  .motion .a.bleed>svg{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 82%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 82%,transparent)}
   .motion .a.lt{display:grid;place-items:center}
   .motion .a.lt>*{grid-area:1/1}
 
@@ -206,9 +209,19 @@
   .furrow{stroke:rgba(232,201,143,.3);stroke-width:1.6;fill:none}
   .field-art .horizon{stroke:var(--gold-deep);stroke-width:2;fill:none}
   .seed{fill:#f3d79c}
-  .drop{stroke:#dfe8f5;stroke-width:3;stroke-linecap:round;opacity:0;fill:none}
-  .motion .drops{display:inline}
-  .motion .field-art{overflow:hidden}
+  .clods{fill:rgba(232,201,143,.13)}
+  .streak{fill:none;stroke:#f6dfa8;stroke-width:2.8;stroke-linecap:round;opacity:0}
+  .f-rip{fill:none;stroke:#f3d79c;stroke-width:2.2}
+  .drop{stroke:#dfe8f5;stroke-width:2.2;stroke-linecap:round;fill:none}
+  .splash{fill:none;stroke:#dfe8f5;stroke-width:1.3}
+  .step{fill:#f3d79c}
+  .crack{fill:none;stroke:#fff1cf;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .shock{fill:none;stroke:#f3d79c;stroke-width:2}
+  .sp-stem{fill:none;stroke:#e9cf95;stroke-width:2.4;stroke-linecap:round}
+  .sp-leaf{fill:#e9cf95}
+  .motion .drops,.motion .streaks,.motion .f-rips,.motion .splashes,.motion .steps,.motion .cracks,.motion .shock,.motion .pulse,.motion .wet{display:inline}
+  .motion .f-rip,.motion .splash,.motion .step,.motion .shock,.motion .pulse,.motion .wet,.motion .clods{opacity:0}
+  .motion .a>svg.field-art{overflow:hidden}
   .stem{fill:none;stroke:#e9cf95;stroke-width:5;stroke-linecap:round}
   .leaf{fill:#e9cf95}
   .motion .seed,.motion .glow{opacity:0}
@@ -449,19 +462,32 @@
           <defs>
             <linearGradient id="earth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16122a"/><stop offset="1" stop-color="#06060c"/></linearGradient>
             <radialGradient id="sproutGlow"><stop offset="0" stop-color="#f3d79c" stop-opacity=".6"/><stop offset="1" stop-color="#f3d79c" stop-opacity="0"/></radialGradient>
+            <linearGradient id="wet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9cdef" stop-opacity=".2"/><stop offset=".45" stop-color="#b9cdef" stop-opacity=".05"/><stop offset="1" stop-color="#b9cdef" stop-opacity="0"/></linearGradient>
           </defs>
+          <g class="cam">
           <rect x="-1500" y="200" width="4000" height="600" fill="url(#earth)"/>
+          <g class="clods">%%CLODS%%</g>
+          <rect class="wet" x="-1500" y="200" width="4000" height="400" fill="url(#wet)"/>
           <g class="furrows">%%FURROWS%%</g>
+          <g class="streaks">%%STREAKS%%</g>
           <path class="draw horizon" d="M-1500 200 H 2500"/>
+          <g class="f-rips">%%RIPS%%</g>
           <g class="seeds">%%SEEDS%%</g>
+          <g class="splashes">%%SPLASHES%%</g>
+          <g class="steps">%%STEPS%%</g>
+          <g class="sps">%%SPROUTS%%</g>
+          <circle class="pulse" cx="500" cy="480" r="40" fill="url(#sproutGlow)"/>
+          <circle class="glow" cx="500" cy="384" r="170" fill="url(#sproutGlow)"/>
+          <g class="cracks">%%CRACKS%%</g>
+          <ellipse class="shock" cx="500" cy="480" rx="44" ry="14"/>
           <g class="drops">%%DROPS%%</g>
-          <circle class="glow" cx="500" cy="450" r="170" fill="url(#sproutGlow)"/>
           <g class="sway">
             <g class="sprout">
-              <path class="draw stem" d="M500 540 C 494 506 507 472 500 432"/>
-              <path class="leaf l" d="M500 472 C 474 464 451 440 451 414 C 478 418 497 441 500 472 Z"/>
-              <path class="leaf r" d="M501 452 C 526 440 547 414 545 389 C 519 397 503 421 501 452 Z"/>
+              <path class="draw stem" d="M500 474 C 494 440 507 406 500 366"/>
+              <path class="leaf l" d="M500 406 C 474 398 451 374 451 348 C 478 352 497 375 500 406 Z"/>
+              <path class="leaf r" d="M501 386 C 526 374 547 348 545 323 C 519 331 503 355 501 386 Z"/>
             </g>
+          </g>
           </g>
         </svg>
       </div>
@@ -884,15 +910,17 @@
 
   function rest(h) { tl.addLabel('p' + (nl++), T); T += (h == null ? 0.2 : h); }
   function at(o) { return o && o.at != null ? o.at : T; }
+  // A word can arrive its own way: o.y is where the letters start (118 is
+  // below their mask, -118 above), with its own ease and stagger.
   function inn(el, o) {
     o = o || {};
     var t = at(o), d = o.d || IN, w = $('.w > span', el), end = t + d;
     if (w.length) {
-      var st = Math.min(0.08, 0.5 / w.length);
-      gsap.set(w, { yPercent: 118, rotation: 4 });
+      var st = o.st || Math.min(0.08, 0.5 / w.length);
+      gsap.set(w, { yPercent: o.y || 118, rotation: o.rot == null ? 4 : o.rot });
       tl.set(el, { opacity: 1 }, t);
-      tl.to(w, { yPercent: 0, rotation: 0, duration: d, stagger: st, ease: 'power3.out' }, t);
-      end = t + d + st * (w.length - 1) * 0.5;
+      tl.to(w, { yPercent: 0, rotation: 0, duration: d, stagger: st, ease: o.ease || 'power3.out' }, t);
+      end = t + d + st * (w.length - 1) * (o.st ? 1 : 0.5);
     } else {
       gsap.set(el, { y: 28 });
       tl.to(el, { opacity: 1, y: 0, duration: d, ease: 'power3.out' }, t);
@@ -979,44 +1007,131 @@
     done(s);
   })();
 
-  // 2. the field
+  // 2. the field. Each word does what it says, and the payoff is a field
+  // that comes alive.
   (function () {
-    var s = scene('sField', true), b = beats(s), art = one('.field-art', s);
-    var furrows = $('.furrow', s), seeds = $('.seed', s), drops = $('.drop', s);
+    var s = scene('sField', true), b = beats(s), art = one('.field-art', s), cam = one('.cam', s);
+    var furrows = $('.furrow', s), streaks = $('.streak', s), seeds = $('.seed', s), rips = $('.f-rip', s);
+    var drops = $('.drop', s), splashes = $('.splash', s), steps = $('.step', s), cracks = $('.crack', s);
+    var sps = $('.sp', s), glow = one('.glow', s), pulse = one('.pulse', s), shock = one('.shock', s);
     var mid = (furrows.length - 1) / 2;
-    var order = furrows.slice().sort(function (a, c) { return Math.abs(furrows.indexOf(a) - mid) - Math.abs(furrows.indexOf(c) - mid); });
+    function fromMid(list) { return list.slice().sort(function (a, c) { return Math.abs(list.indexOf(a) - mid) - Math.abs(list.indexOf(c) - mid); }); }
+    var order = fromMid(furrows), streakOrder = fromMid(streaks);
+    streaks.forEach(function (p) { p._L = Math.ceil(p.getTotalLength()); p.style.strokeDasharray = '110 ' + (p._L + 300); p.style.strokeDashoffset = 110; });
+    // The small sprouts come up in a wave, nearest to the big one first.
+    function far(e) { var m = e.parentNode.transform.baseVal.consolidate().matrix; return Math.hypot(m.e - 500, (m.f - 480) * 2.2); }
+    var near = sps.slice().sort(function (a, c) { return far(a) - far(c); });
     gsap.set(art, { yPercent: 16, opacity: 0 });
-    gsap.set(seeds, { y: -160 });
-    gsap.set(one('.glow', s), { scale: 0.4, svgOrigin: '500 450' });
-    gsap.set(one('.leaf.l', s), { scale: 0, rotation: 30, svgOrigin: '500 472' });
-    gsap.set(one('.leaf.r', s), { scale: 0, rotation: -30, svgOrigin: '501 452' });
+    gsap.set(cam, { scale: 1, svgOrigin: '500 480' });
+    gsap.set(seeds, { y: -180 });
+    gsap.set(rips, { scale: 0.2, opacity: 0, transformOrigin: '50% 50%' });
+    gsap.set(splashes, { scale: 0.2, transformOrigin: '50% 50%' });
+    gsap.set(sps, { scale: 0, transformOrigin: '50% 100%' });
+    gsap.set(shock, { scale: 0.3, svgOrigin: '500 480' });
+    gsap.set(pulse, { scale: 1, svgOrigin: '500 480' });
+    gsap.set(glow, { scale: 0.4, svgOrigin: '500 384' });
+    gsap.set(one('.leaf.l', s), { scale: 0, rotation: 30, svgOrigin: '500 406' });
+    gsap.set(one('.leaf.r', s), { scale: 0, rotation: -30, svgOrigin: '501 386' });
 
     var t = T;
     tl.to(art, { yPercent: 0, opacity: 1, duration: 1.1, ease: 'power3.out' }, t);
+    tl.to(one('.clods', s), { opacity: 1, duration: 1.2 }, t + 0.3);
     inn(b[0]); draw(one('.field-art .horizon', s), t + 0.2, 1.2);
     rest(); out(b[0]);
-    t = T; inn(b[1]); draw(order, t, 1, { stagger: 0.04, ease: 'power2.out' });
+
+    // Split: the ground is cut towards you, light runs down every furrow,
+    // the earth jolts, and the word itself comes apart.
+    t = T; inn(b[1], { d: 0.6, rot: 0, ease: 'power4.out' });
+    draw(order, t + 0.1, 0.8, { stagger: 0.03, ease: 'power3.out' });
+    tl.to(streakOrder, { opacity: 1, duration: 0.05, stagger: 0.03 }, t + 0.1);
+    tl.to(streakOrder, { strokeDashoffset: function (i, e) { return -e._L; }, duration: 0.85, stagger: 0.03, ease: 'power2.in' }, t + 0.1);
+    tl.to(cam, { keyframes: [{ y: 7, duration: 0.07 }, { y: -4, duration: 0.09 }, { y: 0, duration: 0.16 }] }, t + 0.2);
+    tl.to($('.w', b[1]), { x: function (i, e, a) { return (i - (a.length - 1) / 2) * 9; }, duration: 0.7, ease: 'power3.out' }, t + 0.3);
     T = Math.max(T, t + 1.5); rest(); out(b[1]);
-    t = T; inn(b[2]);
-    tl.to(seeds, { y: 0, opacity: 1, duration: 0.6, stagger: 0.045, ease: 'power2.in' }, t);
-    T = Math.max(T, t + 1.3); rest(); out(b[2]);
-    t = T; inn(b[3]);
-    tl.to(drops, { y: 560, duration: 0.7, stagger: 0.02, ease: 'power1.in' }, t);
-    tl.to(drops, { opacity: 0.9, duration: 0.12, stagger: 0.02 }, t);
-    tl.to(drops, { opacity: 0, duration: 0.15, stagger: 0.02 }, t + 0.55);
+
+    // Plant: the letters drop in like seeds, and every seed rings where it lands.
+    t = T; inn(b[2], { y: -118, rot: 0, d: 0.75, st: 0.06, ease: 'back.out(2.4)' });
+    tl.to(seeds, { y: 0, opacity: 1, duration: 0.55, stagger: 0.035, ease: 'power2.in' }, t);
+    rips.forEach(function (r, i) {
+      var land = t + 0.55 + i * 0.035;
+      tl.set(r, { opacity: 0.85 }, land);
+      tl.to(r, { scale: 1, opacity: 0, duration: 0.55, ease: 'power2.out' }, land);
+    });
+    tl.to(seeds, { opacity: 0.7, duration: 0.5 }, t + 1.4);
+    T = Math.max(T, t + 1.6); rest(); out(b[2]);
+
+    // Water: rain across the whole field, splashes, the soil turns wet and
+    // shines, and the word ripples.
+    t = T; inn(b[3], { y: -118, rot: 0, d: 0.7, st: 0.07, ease: 'power2.in' });
+    var wl = $('.w > span', b[3]);
+    tl.to(wl, { y: -5, duration: 0.2, stagger: 0.06, ease: 'sine.out' }, t + 0.75);
+    tl.to(wl, { y: 0, duration: 0.3, stagger: 0.06, ease: 'sine.in' }, t + 0.95);
+    // One shuffled order for all three tweens. A 'random' stagger picks a new
+    // order per tween, and a drop could fade out before it had faded in.
+    var rain = drops.map(function (d, i) { return [(i * 47) % drops.length, d]; })
+      .sort(function (a, c) { return a[0] - c[0]; }).map(function (p) { return p[1]; });
+    tl.to(rain, { opacity: 0.85, duration: 0.1, stagger: 0.016 }, t);
+    tl.to(rain, { y: 720, duration: 0.8, stagger: 0.016 }, t);
+    tl.to(rain, { opacity: 0, duration: 0.1, stagger: 0.016 }, t + 0.7);
+    splashes.forEach(function (e, i) {
+      var hit = t + 0.45 + (i / splashes.length) * 1.3;
+      tl.set(e, { opacity: 0.8 }, hit);
+      tl.to(e, { scale: 1, opacity: 0, duration: 0.45, ease: 'power2.out' }, hit);
+    });
+    tl.to(one('.wet', s), { opacity: 1, duration: 1 }, t + 0.4);
     tl.to(furrows, { stroke: 'rgba(232,201,143,.62)', duration: 0.8 }, t + 0.4);
-    T = Math.max(T, t + 1.35); rest(); out(b[3]);
-    t = T; inn(b[4]); tl.to(furrows, { stroke: 'rgba(232,201,143,.3)', duration: 1 }, t);
-    rest(); out(b[4]);
-    inn(b[5]); rest(); out(b[5]);
-    inn(b[6]); rest(); out(b[6]);
+    tl.to(P, { stars: 0.45, duration: 0.6 }, t);
+    T = Math.max(T, t + 1.9); rest(); out(b[3]);
+
+    // Wait: the word arrives slowly. Days go by over the field, and something
+    // under the soil glows, faintly, like a heartbeat.
+    t = T; inn(b[4], { st: 0.2, d: 0.8, rot: 0, ease: 'power2.out' });
+    tl.to(furrows, { stroke: 'rgba(232,201,143,.3)', duration: 1 }, t);
+    tl.to(one('.wet', s), { opacity: 0, duration: 1.2 }, t);
+    tl.to(P, { stars: 1, duration: 0.6 }, t);
+    for (var k = 0; k < 3; k++) {
+      var dk = t + 0.2 + k * 0.62;
+      tl.to(layers.dawn, { opacity: 0.55, duration: 0.28, ease: 'sine.inOut' }, dk);
+      tl.to(layers.dawn, { opacity: 0, duration: 0.3, ease: 'sine.inOut' }, dk + 0.3);
+    }
+    T = Math.max(T, t + 2.1); rest(); out(b[4]);
+    function beat(at, n) {
+      for (var j = 0; j < n; j++) {
+        tl.to(pulse, { opacity: 0.85, duration: 0.25, ease: 'sine.out' }, at + j * 0.7);
+        tl.to(pulse, { opacity: 0.15, duration: 0.4, ease: 'sine.in' }, at + j * 0.7 + 0.25);
+      }
+    }
+    beat(T - 0.6, 1);
+    t = T; inn(b[5]); beat(t + 0.2, 2); T = Math.max(T, t + 1.6); rest(); out(b[5]);
+
+    // The farmer comes back anyway: footsteps walk in to the spot.
+    t = T; inn(b[6]);
+    steps.forEach(function (e, i) {
+      tl.to(e, { opacity: 0.8, duration: 0.12 }, t + 0.15 + i * 0.13);
+      tl.to(e, { opacity: 0.28, duration: 0.6 }, t + 0.45 + i * 0.13);
+    });
+    beat(t + 1.5, 1);
+    T = Math.max(T, t + 2.1); rest(); out(b[6]);
+
+    // Then one morning: the soil cracks with light, a ring bursts out, the
+    // camera leans in as the sprout rises, and the whole field follows.
     t = T; inn(b[7]);
     sky('dawn', t, 1.6);
-    tl.to(one('.glow', s), { opacity: 1, scale: 1, duration: 1.3 }, t + 0.1);
-    draw(one('.stem', s), t + 0.3, 1, { ease: 'power1.out' });
-    tl.to(one('.leaf.l', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.1);
-    tl.to(one('.leaf.r', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.3);
-    T = Math.max(T, t + 2.05); rest();
+    tl.to(pulse, { opacity: 1, scale: 1.6, duration: 0.3, ease: 'power2.in' }, t + 0.1);
+    tl.to(pulse, { opacity: 0, duration: 0.4 }, t + 0.45);
+    draw(cracks, t + 0.35, 0.45, { stagger: 0.04, ease: 'power3.out' });
+    tl.set(shock, { opacity: 0.9 }, t + 0.4);
+    tl.to(shock, { scale: 5, opacity: 0, duration: 0.9, ease: 'power2.out' }, t + 0.4);
+    tl.to(cam, { scale: 1.12, duration: 1.8, ease: 'power2.inOut' }, t + 0.3);
+    tl.to(glow, { opacity: 1, scale: 1, duration: 1.3 }, t + 0.4);
+    draw(one('.stem', s), t + 0.5, 1, { ease: 'power1.out' });
+    tl.to(one('.leaf.l', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.3);
+    tl.to(one('.leaf.r', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.5);
+    tl.to(cracks, { opacity: 0.35, duration: 0.8 }, t + 1.4);
+    tl.to(seeds, { opacity: 0, duration: 0.5, stagger: 0.02 }, t + 1.6);
+    tl.to(near, { scale: 1, duration: 0.6, stagger: 0.05, ease: 'back.out(2.2)' }, t + 1.7);
+    tl.to(steps, { opacity: 0, duration: 0.6 }, t + 1.7);
+    T = Math.max(T, t + 2.9); rest();
     out(b[7]);
     tl.to(art, { yPercent: 12, opacity: 0, duration: 0.7, ease: 'power2.in' }, T - 0.3);
     T += 0.45;

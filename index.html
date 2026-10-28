@@ -109,7 +109,7 @@
   .a{position:relative;width:100%;max-width:28rem}
   .a>svg{display:block;width:100%;height:auto;overflow:hidden}
   .s-title{min-height:100vh;min-height:100svh;justify-content:center;overflow-x:clip}
-  .bar,.nudge,.ripples,.net,.drops{display:none}
+  .bar,.nudge,.ripples,.net,.drops,.streaks,.f-rips,.splashes,.steps,.cracks,.shock,.pulse,.wet{display:none}
 
   /* ---------- the stage ---------- */
   .motion .stage{position:relative;height:100vh;height:100svh;overflow:hidden}
@@ -133,7 +133,10 @@
   .motion .t>*,.motion .b>*,.motion .m>*{grid-area:1/1}
   .motion .a>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
   .motion .beat{opacity:0}
-  .motion .a.bleed{margin:0 calc(-1 * var(--gut)) calc(-1 * (var(--bot) + 1rem))}
+  /* The field runs edge to edge and fades out just above the nudge, so
+     nothing in it can ever sit under the nudge. */
+  .motion .a.bleed{width:auto;margin:0 calc(-1 * var(--gut))}
+  .motion .a.bleed>svg{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 82%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 9%,#000 82%,transparent)}
   .motion .a.lt{display:grid;place-items:center}
   .motion .a.lt>*{grid-area:1/1}
 
@@ -206,9 +209,19 @@
   .furrow{stroke:rgba(232,201,143,.3);stroke-width:1.6;fill:none}
   .field-art .horizon{stroke:var(--gold-deep);stroke-width:2;fill:none}
   .seed{fill:#f3d79c}
-  .drop{stroke:#dfe8f5;stroke-width:3;stroke-linecap:round;opacity:0;fill:none}
-  .motion .drops{display:inline}
-  .motion .field-art{overflow:hidden}
+  .clods{fill:rgba(232,201,143,.13)}
+  .streak{fill:none;stroke:#f6dfa8;stroke-width:2.8;stroke-linecap:round;opacity:0}
+  .f-rip{fill:none;stroke:#f3d79c;stroke-width:2.2}
+  .drop{stroke:#dfe8f5;stroke-width:2.2;stroke-linecap:round;fill:none}
+  .splash{fill:none;stroke:#dfe8f5;stroke-width:1.3}
+  .step{fill:#f3d79c}
+  .crack{fill:none;stroke:#fff1cf;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .shock{fill:none;stroke:#f3d79c;stroke-width:2}
+  .sp-stem{fill:none;stroke:#e9cf95;stroke-width:2.4;stroke-linecap:round}
+  .sp-leaf{fill:#e9cf95}
+  .motion .drops,.motion .streaks,.motion .f-rips,.motion .splashes,.motion .steps,.motion .cracks,.motion .shock,.motion .pulse,.motion .wet{display:inline}
+  .motion .f-rip,.motion .splash,.motion .step,.motion .shock,.motion .pulse,.motion .wet,.motion .clods{opacity:0}
+  .motion .a>svg.field-art{overflow:hidden}
   .stem{fill:none;stroke:#e9cf95;stroke-width:5;stroke-linecap:round}
   .leaf{fill:#e9cf95}
   .motion .seed,.motion .glow{opacity:0}
@@ -449,19 +462,32 @@
           <defs>
             <linearGradient id="earth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16122a"/><stop offset="1" stop-color="#06060c"/></linearGradient>
             <radialGradient id="sproutGlow"><stop offset="0" stop-color="#f3d79c" stop-opacity=".6"/><stop offset="1" stop-color="#f3d79c" stop-opacity="0"/></radialGradient>
+            <linearGradient id="wet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9cdef" stop-opacity=".2"/><stop offset=".45" stop-color="#b9cdef" stop-opacity=".05"/><stop offset="1" stop-color="#b9cdef" stop-opacity="0"/></linearGradient>
           </defs>
+          <g class="cam">
           <rect x="-1500" y="200" width="4000" height="600" fill="url(#earth)"/>
-          <g class="furrows"><path class="draw furrow" d="M-1100 600 L420 220"/><path class="draw furrow" d="M-940 600 L428 220"/><path class="draw furrow" d="M-780 600 L436 220"/><path class="draw furrow" d="M-620 600 L444 220"/><path class="draw furrow" d="M-460 600 L452 220"/><path class="draw furrow" d="M-300 600 L460 220"/><path class="draw furrow" d="M-140 600 L468 220"/><path class="draw furrow" d="M20 600 L476 220"/><path class="draw furrow" d="M180 600 L484 220"/><path class="draw furrow" d="M340 600 L492 220"/><path class="draw furrow" d="M500 600 L500 220"/><path class="draw furrow" d="M660 600 L508 220"/><path class="draw furrow" d="M820 600 L516 220"/><path class="draw furrow" d="M980 600 L524 220"/><path class="draw furrow" d="M1140 600 L532 220"/><path class="draw furrow" d="M1300 600 L540 220"/><path class="draw furrow" d="M1460 600 L548 220"/><path class="draw furrow" d="M1620 600 L556 220"/><path class="draw furrow" d="M1780 600 L564 220"/><path class="draw furrow" d="M1940 600 L572 220"/><path class="draw furrow" d="M2100 600 L580 220"/></g>
+          <g class="clods"><ellipse cx="547.6" cy="216.1" rx="1" ry="0.4" opacity="0.5"/><ellipse cx="703" cy="326.4" rx="2.1" ry="0.9" opacity="0.7"/><ellipse cx="806.8" cy="373.9" rx="2.6" ry="1.1" opacity="0.8"/><ellipse cx="824.9" cy="451.5" rx="3.4" ry="1.4" opacity="0.7"/><ellipse cx="-118.7" cy="542.6" rx="4.4" ry="1.8" opacity="0.6"/><ellipse cx="926" cy="507.3" rx="4" ry="1.7" opacity="0.3"/><ellipse cx="432.7" cy="499.4" rx="3.9" ry="1.7" opacity="0.9"/><ellipse cx="-396.6" cy="539.6" rx="4.4" ry="1.8" opacity="0.7"/><ellipse cx="996.4" cy="576.2" rx="4.8" ry="2" opacity="0.8"/><ellipse cx="1259.9" cy="463.5" rx="3.6" ry="1.5" opacity="0.9"/><ellipse cx="280.9" cy="390.2" rx="2.8" ry="1.2" opacity="0.9"/><ellipse cx="74.3" cy="375" rx="2.6" ry="1.1" opacity="0.5"/><ellipse cx="197.1" cy="410.9" rx="3" ry="1.3" opacity="1"/><ellipse cx="911.8" cy="456.6" rx="3.5" ry="1.5" opacity="0.9"/><ellipse cx="411.7" cy="255.7" rx="1.4" ry="0.6" opacity="0.7"/><ellipse cx="368.2" cy="439.7" rx="3.3" ry="1.4" opacity="0.4"/><ellipse cx="-658.4" cy="571.8" rx="4.7" ry="2" opacity="0.6"/><ellipse cx="706.7" cy="379.6" rx="2.7" ry="1.1" opacity="0.9"/><ellipse cx="-66" cy="441.8" rx="3.3" ry="1.4" opacity="0.6"/><ellipse cx="351.9" cy="356.1" rx="2.4" ry="1" opacity="0.6"/><ellipse cx="538.8" cy="375.2" rx="2.6" ry="1.1" opacity="0.7"/><ellipse cx="886.5" cy="335.8" rx="2.2" ry="0.9" opacity="0.6"/><ellipse cx="838" cy="557.3" rx="4.6" ry="1.9" opacity="0.7"/><ellipse cx="508.4" cy="442.3" rx="3.3" ry="1.4" opacity="0.8"/><ellipse cx="224.3" cy="581.3" rx="4.8" ry="2" opacity="0.8"/><ellipse cx="587" cy="343.1" rx="2.3" ry="1" opacity="0.5"/><ellipse cx="367.5" cy="374.4" rx="2.6" ry="1.1" opacity="0.9"/><ellipse cx="-485.3" cy="561.9" rx="4.6" ry="1.9" opacity="0.9"/><ellipse cx="457.1" cy="265.8" rx="1.5" ry="0.6" opacity="0.4"/><ellipse cx="728.7" cy="265.8" rx="1.5" ry="0.6" opacity="0.5"/><ellipse cx="-202.6" cy="482.1" rx="3.8" ry="1.6" opacity="0.6"/><ellipse cx="-181.4" cy="468.8" rx="3.6" ry="1.5" opacity="0.9"/><ellipse cx="1495.5" cy="564.1" rx="4.6" ry="1.9" opacity="0.9"/><ellipse cx="1178.9" cy="571.4" rx="4.7" ry="2" opacity="0.5"/><ellipse cx="454.2" cy="226" rx="1.1" ry="0.5" opacity="0.4"/><ellipse cx="514.9" cy="218.2" rx="1" ry="0.4" opacity="0.5"/><ellipse cx="476.3" cy="518.2" rx="4.1" ry="1.7" opacity="0.8"/><ellipse cx="868.6" cy="337.8" rx="2.2" ry="0.9" opacity="0.5"/><ellipse cx="1026.6" cy="390.8" rx="2.8" ry="1.2" opacity="0.4"/><ellipse cx="-309.8" cy="432.8" rx="3.2" ry="1.4" opacity="0.9"/><ellipse cx="1338.2" cy="483.7" rx="3.8" ry="1.6" opacity="0.3"/><ellipse cx="-305.5" cy="569" rx="4.7" ry="2" opacity="1"/><ellipse cx="825.6" cy="459.3" rx="3.5" ry="1.5" opacity="0.5"/><ellipse cx="232" cy="331.5" rx="2.2" ry="0.9" opacity="0.7"/><ellipse cx="598.6" cy="252.3" rx="1.3" ry="0.6" opacity="0.8"/><ellipse cx="496.1" cy="509.3" rx="4" ry="1.7" opacity="0.3"/><ellipse cx="740" cy="281.8" rx="1.7" ry="0.7" opacity="0.4"/><ellipse cx="1327.2" cy="500.7" rx="4" ry="1.7" opacity="0.3"/><ellipse cx="1419.9" cy="563.7" rx="4.6" ry="1.9" opacity="1"/><ellipse cx="1215.5" cy="585.9" rx="4.9" ry="2" opacity="0.6"/><ellipse cx="726.2" cy="341.9" rx="2.3" ry="1" opacity="0.9"/><ellipse cx="128.9" cy="399.9" rx="2.9" ry="1.2" opacity="0.6"/><ellipse cx="650.1" cy="564.9" rx="4.6" ry="1.9" opacity="0.5"/><ellipse cx="957.9" cy="478.5" rx="3.7" ry="1.6" opacity="0.5"/><ellipse cx="330.8" cy="513" rx="4.1" ry="1.7" opacity="0.4"/><ellipse cx="1068" cy="367.1" rx="2.6" ry="1.1" opacity="1"/><ellipse cx="1235.1" cy="482.2" rx="3.8" ry="1.6" opacity="0.9"/><ellipse cx="623.8" cy="321.8" rx="2.1" ry="0.9" opacity="0.4"/><ellipse cx="594.6" cy="435.6" rx="3.3" ry="1.4" opacity="0.8"/><ellipse cx="451.9" cy="583.2" rx="4.8" ry="2" opacity="0.4"/><ellipse cx="-8.4" cy="417.5" rx="3.1" ry="1.3" opacity="0.8"/><ellipse cx="605.2" cy="444.2" rx="3.4" ry="1.4" opacity="0.7"/><ellipse cx="188.6" cy="523.4" rx="4.2" ry="1.8" opacity="0.8"/><ellipse cx="448.3" cy="236.7" rx="1.2" ry="0.5" opacity="0.7"/><ellipse cx="692.1" cy="323.1" rx="2.1" ry="0.9" opacity="0.5"/><ellipse cx="652.9" cy="336.8" rx="2.2" ry="0.9" opacity="0.6"/><ellipse cx="623.2" cy="264.5" rx="1.5" ry="0.6" opacity="0.9"/><ellipse cx="1572.8" cy="573.8" rx="4.7" ry="2" opacity="0.8"/><ellipse cx="-787.3" cy="587.3" rx="4.9" ry="2" opacity="0.8"/><ellipse cx="925.8" cy="471.5" rx="3.7" ry="1.5" opacity="0.9"/><ellipse cx="389.2" cy="243.5" rx="1.3" ry="0.5" opacity="0.4"/><ellipse cx="265.1" cy="280.8" rx="1.6" ry="0.7" opacity="0.3"/><ellipse cx="1351.5" cy="472.9" rx="3.7" ry="1.5" opacity="0.4"/><ellipse cx="306.7" cy="292.8" rx="1.8" ry="0.7" opacity="0.8"/><ellipse cx="457.3" cy="339.9" rx="2.3" ry="1" opacity="1"/><ellipse cx="753.9" cy="408.8" rx="3" ry="1.3" opacity="0.8"/><ellipse cx="383.4" cy="399.3" rx="2.9" ry="1.2" opacity="0.3"/><ellipse cx="789.8" cy="334.6" rx="2.2" ry="0.9" opacity="1"/><ellipse cx="801.7" cy="301.3" rx="1.9" ry="0.8" opacity="0.7"/><ellipse cx="322.6" cy="287.4" rx="1.7" ry="0.7" opacity="0.7"/><ellipse cx="177.3" cy="309.3" rx="1.9" ry="0.8" opacity="0.5"/><ellipse cx="612.7" cy="486.9" rx="3.8" ry="1.6" opacity="0.6"/><ellipse cx="-683.7" cy="598.1" rx="5" ry="2.1" opacity="0.6"/><ellipse cx="-83.7" cy="368.2" rx="2.6" ry="1.1" opacity="0.3"/><ellipse cx="-87.7" cy="405.4" rx="3" ry="1.2" opacity="0.5"/><ellipse cx="1231.2" cy="576.5" rx="4.8" ry="2" opacity="0.8"/><ellipse cx="1031.6" cy="414" rx="3" ry="1.3" opacity="1"/><ellipse cx="882.4" cy="537.5" rx="4.3" ry="1.8" opacity="0.7"/><ellipse cx="382.1" cy="381.1" rx="2.7" ry="1.1" opacity="0.6"/><ellipse cx="610.8" cy="434.7" rx="3.3" ry="1.4" opacity="0.8"/></g>
+          <rect class="wet" x="-1500" y="200" width="4000" height="400" fill="url(#wet)"/>
+          <g class="furrows"><path class="draw furrow" d="M420 220 L-1100 600"/><path class="draw furrow" d="M428 220 L-940 600"/><path class="draw furrow" d="M436 220 L-780 600"/><path class="draw furrow" d="M444 220 L-620 600"/><path class="draw furrow" d="M452 220 L-460 600"/><path class="draw furrow" d="M460 220 L-300 600"/><path class="draw furrow" d="M468 220 L-140 600"/><path class="draw furrow" d="M476 220 L20 600"/><path class="draw furrow" d="M484 220 L180 600"/><path class="draw furrow" d="M492 220 L340 600"/><path class="draw furrow" d="M500 220 L500 600"/><path class="draw furrow" d="M508 220 L660 600"/><path class="draw furrow" d="M516 220 L820 600"/><path class="draw furrow" d="M524 220 L980 600"/><path class="draw furrow" d="M532 220 L1140 600"/><path class="draw furrow" d="M540 220 L1300 600"/><path class="draw furrow" d="M548 220 L1460 600"/><path class="draw furrow" d="M556 220 L1620 600"/><path class="draw furrow" d="M564 220 L1780 600"/><path class="draw furrow" d="M572 220 L1940 600"/><path class="draw furrow" d="M580 220 L2100 600"/></g>
+          <g class="streaks"><path class="streak" d="M420 220 L-1100 600"/><path class="streak" d="M428 220 L-940 600"/><path class="streak" d="M436 220 L-780 600"/><path class="streak" d="M444 220 L-620 600"/><path class="streak" d="M452 220 L-460 600"/><path class="streak" d="M460 220 L-300 600"/><path class="streak" d="M468 220 L-140 600"/><path class="streak" d="M476 220 L20 600"/><path class="streak" d="M484 220 L180 600"/><path class="streak" d="M492 220 L340 600"/><path class="streak" d="M500 220 L500 600"/><path class="streak" d="M508 220 L660 600"/><path class="streak" d="M516 220 L820 600"/><path class="streak" d="M524 220 L980 600"/><path class="streak" d="M532 220 L1140 600"/><path class="streak" d="M540 220 L1300 600"/><path class="streak" d="M548 220 L1460 600"/><path class="streak" d="M556 220 L1620 600"/><path class="streak" d="M564 220 L1780 600"/><path class="streak" d="M572 220 L1940 600"/><path class="streak" d="M580 220 L2100 600"/></g>
           <path class="draw horizon" d="M-1500 200 H 2500"/>
-          <g class="seeds"><circle class="seed" cx="384.8" cy="344" r="3.8"/><circle class="seed" cx="308" cy="440" r="5"/><circle class="seed" cx="224.8" cy="544" r="6.3"/><circle class="seed" cx="442.4" cy="344" r="3.8"/><circle class="seed" cx="404" cy="440" r="5"/><circle class="seed" cx="362.4" cy="544" r="6.3"/><circle class="seed" cx="500" cy="344" r="3.8"/><circle class="seed" cx="500" cy="440" r="5"/><circle class="seed" cx="557.6" cy="344" r="3.8"/><circle class="seed" cx="596" cy="440" r="5"/><circle class="seed" cx="637.6" cy="544" r="6.3"/><circle class="seed" cx="615.2" cy="344" r="3.8"/><circle class="seed" cx="692" cy="440" r="5"/><circle class="seed" cx="775.2" cy="544" r="6.3"/></g>
-          <g class="drops"><path class="drop" d="M180 -187.3 l-3 26"/><path class="drop" d="M365.1 -73.7 l-3 26"/><path class="drop" d="M646.8 -125.2 l-3 26"/><path class="drop" d="M390.8 -160.3 l-3 26"/><path class="drop" d="M663.2 -126.9 l-3 26"/><path class="drop" d="M618.1 -141.7 l-3 26"/><path class="drop" d="M702.7 -78.7 l-3 26"/><path class="drop" d="M419.5 -153.3 l-3 26"/><path class="drop" d="M626.7 -48.6 l-3 26"/><path class="drop" d="M617.7 -114.9 l-3 26"/><path class="drop" d="M770.3 -169.2 l-3 26"/><path class="drop" d="M258.6 -122.1 l-3 26"/><path class="drop" d="M770.8 -150.2 l-3 26"/><path class="drop" d="M592 -132.4 l-3 26"/><path class="drop" d="M763.7 -185.3 l-3 26"/><path class="drop" d="M418.2 -93.7 l-3 26"/><path class="drop" d="M715.8 -93.2 l-3 26"/><path class="drop" d="M277.6 -87.6 l-3 26"/><path class="drop" d="M454.2 -87.2 l-3 26"/><path class="drop" d="M779.8 -129.2 l-3 26"/><path class="drop" d="M646.7 -180.5 l-3 26"/><path class="drop" d="M217.5 -83.8 l-3 26"/><path class="drop" d="M538.8 -121.4 l-3 26"/><path class="drop" d="M449.7 -70.9 l-3 26"/><path class="drop" d="M761.7 -48.8 l-3 26"/><path class="drop" d="M413.9 -95.1 l-3 26"/><path class="drop" d="M605.2 -187.9 l-3 26"/><path class="drop" d="M509.5 -66.5 l-3 26"/></g>
-          <circle class="glow" cx="500" cy="450" r="170" fill="url(#sproutGlow)"/>
+          <g class="f-rips"><ellipse class="f-rip" cx="346.4" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="260" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="164" cy="480" rx="35.8" ry="11.7"/><ellipse class="f-rip" cx="68" cy="560" rx="42.6" ry="13.9"/><ellipse class="f-rip" cx="397.6" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="340" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="276" cy="480" rx="35.8" ry="11.7"/><ellipse class="f-rip" cx="212" cy="560" rx="42.6" ry="13.9"/><ellipse class="f-rip" cx="448.8" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="420" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="388" cy="480" rx="35.8" ry="11.7"/><ellipse class="f-rip" cx="356" cy="560" rx="42.6" ry="13.9"/><ellipse class="f-rip" cx="500" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="500" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="500" cy="560" rx="42.6" ry="13.9"/><ellipse class="f-rip" cx="551.2" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="580" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="612" cy="480" rx="35.8" ry="11.7"/><ellipse class="f-rip" cx="644" cy="560" rx="42.6" ry="13.9"/><ellipse class="f-rip" cx="602.4" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="660" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="724" cy="480" rx="35.8" ry="11.7"/><ellipse class="f-rip" cx="788" cy="560" rx="42.6" ry="13.9"/><ellipse class="f-rip" cx="653.6" cy="328" rx="22.9" ry="7.5"/><ellipse class="f-rip" cx="740" cy="400" rx="29" ry="9.5"/><ellipse class="f-rip" cx="836" cy="480" rx="35.8" ry="11.7"/><ellipse class="f-rip" cx="932" cy="560" rx="42.6" ry="13.9"/></g>
+          <g class="seeds"><circle class="seed" cx="346.4" cy="328" r="3.6"/><circle class="seed" cx="260" cy="400" r="4.5"/><circle class="seed" cx="164" cy="480" r="5.5"/><circle class="seed" cx="68" cy="560" r="6.5"/><circle class="seed" cx="397.6" cy="328" r="3.6"/><circle class="seed" cx="340" cy="400" r="4.5"/><circle class="seed" cx="276" cy="480" r="5.5"/><circle class="seed" cx="212" cy="560" r="6.5"/><circle class="seed" cx="448.8" cy="328" r="3.6"/><circle class="seed" cx="420" cy="400" r="4.5"/><circle class="seed" cx="388" cy="480" r="5.5"/><circle class="seed" cx="356" cy="560" r="6.5"/><circle class="seed" cx="500" cy="328" r="3.6"/><circle class="seed" cx="500" cy="400" r="4.5"/><circle class="seed" cx="500" cy="560" r="6.5"/><circle class="seed" cx="551.2" cy="328" r="3.6"/><circle class="seed" cx="580" cy="400" r="4.5"/><circle class="seed" cx="612" cy="480" r="5.5"/><circle class="seed" cx="644" cy="560" r="6.5"/><circle class="seed" cx="602.4" cy="328" r="3.6"/><circle class="seed" cx="660" cy="400" r="4.5"/><circle class="seed" cx="724" cy="480" r="5.5"/><circle class="seed" cx="788" cy="560" r="6.5"/><circle class="seed" cx="653.6" cy="328" r="3.6"/><circle class="seed" cx="740" cy="400" r="4.5"/><circle class="seed" cx="836" cy="480" r="5.5"/><circle class="seed" cx="932" cy="560" r="6.5"/></g>
+          <g class="splashes"><ellipse class="splash" cx="609.7" cy="562.4" rx="22.3" ry="8"/><ellipse class="splash" cx="430.5" cy="416.8" rx="15.8" ry="5.7"/><ellipse class="splash" cx="327.5" cy="419.5" rx="15.9" ry="5.7"/><ellipse class="splash" cx="362.6" cy="346.4" rx="12.6" ry="4.5"/><ellipse class="splash" cx="436.7" cy="442.8" rx="16.9" ry="6.1"/><ellipse class="splash" cx="535.9" cy="327.4" rx="11.7" ry="4.2"/><ellipse class="splash" cx="480.3" cy="421.1" rx="15.9" ry="5.7"/><ellipse class="splash" cx="592.8" cy="329.9" rx="11.8" ry="4.3"/><ellipse class="splash" cx="424.8" cy="382.3" rx="14.2" ry="5.1"/><ellipse class="splash" cx="414.9" cy="336.5" rx="12.1" ry="4.4"/><ellipse class="splash" cx="354.2" cy="431.2" rx="16.4" ry="5.9"/><ellipse class="splash" cx="546.3" cy="482.3" rx="18.7" ry="6.7"/><ellipse class="splash" cx="695" cy="526.2" rx="20.7" ry="7.4"/><ellipse class="splash" cx="690.9" cy="447.7" rx="17.1" ry="6.2"/><ellipse class="splash" cx="256.7" cy="505.3" rx="19.7" ry="7.1"/><ellipse class="splash" cx="642.5" cy="487.2" rx="18.9" ry="6.8"/><ellipse class="splash" cx="561.7" cy="567.3" rx="22.5" ry="8.1"/><ellipse class="splash" cx="328.4" cy="590.2" rx="23.6" ry="8.5"/><ellipse class="splash" cx="112.9" cy="598.4" rx="23.9" ry="8.6"/><ellipse class="splash" cx="447.1" cy="331" rx="11.9" ry="4.3"/><ellipse class="splash" cx="798.7" cy="556.9" rx="22.1" ry="7.9"/><ellipse class="splash" cx="531.1" cy="517" rx="20.3" ry="7.3"/><ellipse class="splash" cx="512.5" cy="371.8" rx="13.7" ry="4.9"/><ellipse class="splash" cx="280.1" cy="533" rx="21" ry="7.6"/><ellipse class="splash" cx="632.1" cy="543.6" rx="21.5" ry="7.7"/><ellipse class="splash" cx="760" cy="474.5" rx="18.4" ry="6.6"/><ellipse class="splash" cx="309.8" cy="392" rx="14.6" ry="5.3"/><ellipse class="splash" cx="509.9" cy="520.4" rx="20.4" ry="7.4"/><ellipse class="splash" cx="614.6" cy="484.2" rx="18.8" ry="6.8"/><ellipse class="splash" cx="209.3" cy="504.5" rx="19.7" ry="7.1"/><ellipse class="splash" cx="815" cy="511.9" rx="20" ry="7.2"/><ellipse class="splash" cx="633.5" cy="553.7" rx="21.9" ry="7.9"/><ellipse class="splash" cx="340.2" cy="470.1" rx="18.2" ry="6.5"/><ellipse class="splash" cx="540.9" cy="489" rx="19" ry="6.8"/><ellipse class="splash" cx="267.6" cy="431.8" rx="16.4" ry="5.9"/><ellipse class="splash" cx="615.2" cy="558.9" rx="22.1" ry="8"/><ellipse class="splash" cx="341.4" cy="592.9" rx="23.7" ry="8.5"/><ellipse class="splash" cx="797.6" cy="523.3" rx="20.5" ry="7.4"/><ellipse class="splash" cx="569.7" cy="471.3" rx="18.2" ry="6.6"/><ellipse class="splash" cx="413.6" cy="359.4" rx="13.2" ry="4.7"/></g>
+          <g class="steps"><ellipse class="step" cx="505.6" cy="256" rx="4.8" ry="2.1"/><ellipse class="step" cx="525.4" cy="278.4" rx="5.3" ry="2.4"/><ellipse class="step" cx="514.2" cy="300.8" rx="5.8" ry="2.6"/><ellipse class="step" cx="537" cy="323.2" rx="6.3" ry="2.8"/><ellipse class="step" cx="522.7" cy="345.6" rx="6.8" ry="3"/><ellipse class="step" cx="548.7" cy="368" rx="7.3" ry="3.3"/><ellipse class="step" cx="531.2" cy="390.4" rx="7.8" ry="3.5"/><ellipse class="step" cx="560.3" cy="412.8" rx="8.3" ry="3.7"/><ellipse class="step" cx="539.7" cy="435.2" rx="8.8" ry="4"/><ellipse class="step" cx="572" cy="457.6" rx="9.3" ry="4.2"/></g>
+          <g class="sps"><g transform="translate(346.4 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(260 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(164 480) scale(1.1)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(68 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(397.6 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(340 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(276 480) scale(1.1)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(212 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(448.8 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(420 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(388 480) scale(1.1)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(356 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(500 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(500 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(500 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(551.2 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(580 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(612 480) scale(1.1)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(644 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(602.4 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(660 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(724 480) scale(1.1)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(788 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(653.6 328) scale(0.7)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(740 400) scale(0.9)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(836 480) scale(1.1)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g><g transform="translate(932 560) scale(1.3)"><g class="sp"><path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/><path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/><path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g></g>
+          <circle class="pulse" cx="500" cy="480" r="40" fill="url(#sproutGlow)"/>
+          <circle class="glow" cx="500" cy="384" r="170" fill="url(#sproutGlow)"/>
+          <g class="cracks"><path class="draw crack" d="M500 480 L524.8 482.2 L550.4 482 L574.5 485"/><path class="draw crack" d="M500 480 L507.9 490.6 L530.5 498.5 L549.3 507.4"/><path class="draw crack" d="M500 480 L493 489.6 L488 499.3 L483.6 509"/><path class="draw crack" d="M500 480 L484.8 483.4 L469.2 486.5 L452.4 488.8"/><path class="draw crack" d="M500 480 L474.7 477 L448.8 474.8 L424 471.4"/><path class="draw crack" d="M500 480 L494 468.4 L477.1 458.1 L468.4 446.7"/><path class="draw crack" d="M500 480 L514.3 468.7 L522.6 456.7 L536.4 445.2"/><path class="draw crack" d="M500 480 L514.3 476.4 L526.4 472 L543.6 470.6"/></g>
+          <ellipse class="shock" cx="500" cy="480" rx="44" ry="14"/>
+          <g class="drops"><path class="drop" d="M714.7 -229.8 l-8 54" opacity="0"/><path class="drop" d="M674 -305.4 l-8 54" opacity="0"/><path class="drop" d="M762.3 -336.5 l-8 54" opacity="0"/><path class="drop" d="M419.5 -186.1 l-8 54" opacity="0"/><path class="drop" d="M847.5 -332.5 l-8 54" opacity="0"/><path class="drop" d="M391.9 -63.8 l-8 54" opacity="0"/><path class="drop" d="M295.6 -304.8 l-8 54" opacity="0"/><path class="drop" d="M658.4 -261.4 l-8 54" opacity="0"/><path class="drop" d="M845.9 -276.1 l-8 54" opacity="0"/><path class="drop" d="M119.2 -111.4 l-8 54" opacity="0"/><path class="drop" d="M726.8 -71.2 l-8 54" opacity="0"/><path class="drop" d="M815.8 -280.1 l-8 54" opacity="0"/><path class="drop" d="M675.8 -253.4 l-8 54" opacity="0"/><path class="drop" d="M527.3 -172.9 l-8 54" opacity="0"/><path class="drop" d="M782.8 -209 l-8 54" opacity="0"/><path class="drop" d="M985.8 -121.2 l-8 54" opacity="0"/><path class="drop" d="M641.8 -170.2 l-8 54" opacity="0"/><path class="drop" d="M420.3 -96.3 l-8 54" opacity="0"/><path class="drop" d="M615.8 -109.4 l-8 54" opacity="0"/><path class="drop" d="M803.1 -286.6 l-8 54" opacity="0"/><path class="drop" d="M376.9 -244.9 l-8 54" opacity="0"/><path class="drop" d="M990.6 -74.8 l-8 54" opacity="0"/><path class="drop" d="M353.8 -316.3 l-8 54" opacity="0"/><path class="drop" d="M121 -79.5 l-8 54" opacity="0"/><path class="drop" d="M366.5 -46.5 l-8 54" opacity="0"/><path class="drop" d="M646.6 -309.4 l-8 54" opacity="0"/><path class="drop" d="M251.5 -103.6 l-8 54" opacity="0"/><path class="drop" d="M1081.5 -250 l-8 54" opacity="0"/><path class="drop" d="M253.1 -75.1 l-8 54" opacity="0"/><path class="drop" d="M596.2 -44.8 l-8 54" opacity="0"/><path class="drop" d="M905.5 -217.5 l-8 54" opacity="0"/><path class="drop" d="M690.9 -78.4 l-8 54" opacity="0"/><path class="drop" d="M371.8 -254.4 l-8 54" opacity="0"/><path class="drop" d="M1091.6 -204.4 l-8 54" opacity="0"/><path class="drop" d="M567 -273.2 l-8 54" opacity="0"/><path class="drop" d="M653.9 -260.1 l-8 54" opacity="0"/><path class="drop" d="M626.8 -70.1 l-8 54" opacity="0"/><path class="drop" d="M154.5 -224 l-8 54" opacity="0"/><path class="drop" d="M290.9 -214.3 l-8 54" opacity="0"/><path class="drop" d="M176.2 -106.9 l-8 54" opacity="0"/><path class="drop" d="M591.2 -228.8 l-8 54" opacity="0"/><path class="drop" d="M737.8 -111.8 l-8 54" opacity="0"/><path class="drop" d="M1027.2 -55.8 l-8 54" opacity="0"/><path class="drop" d="M644.9 -162 l-8 54" opacity="0"/><path class="drop" d="M721.9 -237.9 l-8 54" opacity="0"/><path class="drop" d="M896.1 -71.4 l-8 54" opacity="0"/><path class="drop" d="M818.8 -190.3 l-8 54" opacity="0"/><path class="drop" d="M745.4 -167.5 l-8 54" opacity="0"/><path class="drop" d="M976.2 -277.2 l-8 54" opacity="0"/><path class="drop" d="M672.6 -312.3 l-8 54" opacity="0"/><path class="drop" d="M772.2 -97.1 l-8 54" opacity="0"/><path class="drop" d="M785.6 -86.4 l-8 54" opacity="0"/><path class="drop" d="M215.2 -324.6 l-8 54" opacity="0"/><path class="drop" d="M845.6 -56.9 l-8 54" opacity="0"/><path class="drop" d="M-50 -118.6 l-8 54" opacity="0"/><path class="drop" d="M835 -300.9 l-8 54" opacity="0"/><path class="drop" d="M847 -123.1 l-8 54" opacity="0"/><path class="drop" d="M107.7 -48.9 l-8 54" opacity="0"/><path class="drop" d="M477.1 -207.8 l-8 54" opacity="0"/><path class="drop" d="M227.6 -136.9 l-8 54" opacity="0"/><path class="drop" d="M475.2 -108 l-8 54" opacity="0"/><path class="drop" d="M161.8 -53.3 l-8 54" opacity="0"/><path class="drop" d="M191.1 -228.8 l-8 54" opacity="0"/><path class="drop" d="M458.3 -282.4 l-8 54" opacity="0"/><path class="drop" d="M673.4 -193.2 l-8 54" opacity="0"/><path class="drop" d="M652.3 -156.4 l-8 54" opacity="0"/><path class="drop" d="M647.4 -329.6 l-8 54" opacity="0"/><path class="drop" d="M705.7 -328.6 l-8 54" opacity="0"/><path class="drop" d="M660.8 -221 l-8 54" opacity="0"/><path class="drop" d="M893.5 -91.4 l-8 54" opacity="0"/><path class="drop" d="M169.7 -258 l-8 54" opacity="0"/><path class="drop" d="M611.5 -169.3 l-8 54" opacity="0"/><path class="drop" d="M558.2 -156.1 l-8 54" opacity="0"/><path class="drop" d="M495.8 -76.6 l-8 54" opacity="0"/><path class="drop" d="M170.4 -63.7 l-8 54" opacity="0"/><path class="drop" d="M310.5 -143.4 l-8 54" opacity="0"/><path class="drop" d="M272.1 -232 l-8 54" opacity="0"/><path class="drop" d="M215.3 -55.7 l-8 54" opacity="0"/><path class="drop" d="M-147.9 -290.7 l-8 54" opacity="0"/><path class="drop" d="M780.8 -53.3 l-8 54" opacity="0"/><path class="drop" d="M703.8 -135.5 l-8 54" opacity="0"/><path class="drop" d="M373 -312.5 l-8 54" opacity="0"/><path class="drop" d="M725.5 -43.5 l-8 54" opacity="0"/><path class="drop" d="M874.9 -101.6 l-8 54" opacity="0"/><path class="drop" d="M685.7 -168.3 l-8 54" opacity="0"/><path class="drop" d="M145.2 -91.8 l-8 54" opacity="0"/><path class="drop" d="M694 -266.2 l-8 54" opacity="0"/><path class="drop" d="M173.8 -297.3 l-8 54" opacity="0"/><path class="drop" d="M738.3 -135.4 l-8 54" opacity="0"/><path class="drop" d="M469 -129.7 l-8 54" opacity="0"/><path class="drop" d="M179.3 -304.5 l-8 54" opacity="0"/><path class="drop" d="M781.2 -243.5 l-8 54" opacity="0"/><path class="drop" d="M498.8 -300 l-8 54" opacity="0"/><path class="drop" d="M915.7 -283.9 l-8 54" opacity="0"/><path class="drop" d="M698.1 -331.1 l-8 54" opacity="0"/><path class="drop" d="M645.4 -125.6 l-8 54" opacity="0"/><path class="drop" d="M775.7 -137.3 l-8 54" opacity="0"/><path class="drop" d="M776.6 -88.9 l-8 54" opacity="0"/><path class="drop" d="M762.5 -237.6 l-8 54" opacity="0"/><path class="drop" d="M910.8 -180.1 l-8 54" opacity="0"/><path class="drop" d="M724.8 -288.6 l-8 54" opacity="0"/><path class="drop" d="M152.3 -109.5 l-8 54" opacity="0"/><path class="drop" d="M104.2 -47 l-8 54" opacity="0"/><path class="drop" d="M558.9 -283.6 l-8 54" opacity="0"/><path class="drop" d="M596.6 -296 l-8 54" opacity="0"/><path class="drop" d="M975.1 -284 l-8 54" opacity="0"/><path class="drop" d="M277.7 -208.7 l-8 54" opacity="0"/><path class="drop" d="M469.4 -155.8 l-8 54" opacity="0"/><path class="drop" d="M549.7 -265.3 l-8 54" opacity="0"/><path class="drop" d="M513.4 -155.1 l-8 54" opacity="0"/><path class="drop" d="M499.8 -113.4 l-8 54" opacity="0"/><path class="drop" d="M764.3 -271.5 l-8 54" opacity="0"/><path class="drop" d="M346 -116.4 l-8 54" opacity="0"/><path class="drop" d="M586.6 -205.5 l-8 54" opacity="0"/><path class="drop" d="M1069.7 -210.5 l-8 54" opacity="0"/><path class="drop" d="M360.4 -220.1 l-8 54" opacity="0"/><path class="drop" d="M555.9 -230.8 l-8 54" opacity="0"/><path class="drop" d="M592.4 -88.4 l-8 54" opacity="0"/><path class="drop" d="M278.6 -75.5 l-8 54" opacity="0"/><path class="drop" d="M373.4 -230.2 l-8 54" opacity="0"/></g>
           <g class="sway">
             <g class="sprout">
-              <path class="draw stem" d="M500 540 C 494 506 507 472 500 432"/>
-              <path class="leaf l" d="M500 472 C 474 464 451 440 451 414 C 478 418 497 441 500 472 Z"/>
-              <path class="leaf r" d="M501 452 C 526 440 547 414 545 389 C 519 397 503 421 501 452 Z"/>
+              <path class="draw stem" d="M500 474 C 494 440 507 406 500 366"/>
+              <path class="leaf l" d="M500 406 C 474 398 451 374 451 348 C 478 352 497 375 500 406 Z"/>
+              <path class="leaf r" d="M501 386 C 526 374 547 348 545 323 C 519 331 503 355 501 386 Z"/>
             </g>
+          </g>
           </g>
         </svg>
       </div>
@@ -884,15 +910,17 @@
 
   function rest(h) { tl.addLabel('p' + (nl++), T); T += (h == null ? 0.2 : h); }
   function at(o) { return o && o.at != null ? o.at : T; }
+  // A word can arrive its own way: o.y is where the letters start (118 is
+  // below their mask, -118 above), with its own ease and stagger.
   function inn(el, o) {
     o = o || {};
     var t = at(o), d = o.d || IN, w = $('.w > span', el), end = t + d;
     if (w.length) {
-      var st = Math.min(0.08, 0.5 / w.length);
-      gsap.set(w, { yPercent: 118, rotation: 4 });
+      var st = o.st || Math.min(0.08, 0.5 / w.length);
+      gsap.set(w, { yPercent: o.y || 118, rotation: o.rot == null ? 4 : o.rot });
       tl.set(el, { opacity: 1 }, t);
-      tl.to(w, { yPercent: 0, rotation: 0, duration: d, stagger: st, ease: 'power3.out' }, t);
-      end = t + d + st * (w.length - 1) * 0.5;
+      tl.to(w, { yPercent: 0, rotation: 0, duration: d, stagger: st, ease: o.ease || 'power3.out' }, t);
+      end = t + d + st * (w.length - 1) * (o.st ? 1 : 0.5);
     } else {
       gsap.set(el, { y: 28 });
       tl.to(el, { opacity: 1, y: 0, duration: d, ease: 'power3.out' }, t);
@@ -979,44 +1007,131 @@
     done(s);
   })();
 
-  // 2. the field
+  // 2. the field. Each word does what it says, and the payoff is a field
+  // that comes alive.
   (function () {
-    var s = scene('sField', true), b = beats(s), art = one('.field-art', s);
-    var furrows = $('.furrow', s), seeds = $('.seed', s), drops = $('.drop', s);
+    var s = scene('sField', true), b = beats(s), art = one('.field-art', s), cam = one('.cam', s);
+    var furrows = $('.furrow', s), streaks = $('.streak', s), seeds = $('.seed', s), rips = $('.f-rip', s);
+    var drops = $('.drop', s), splashes = $('.splash', s), steps = $('.step', s), cracks = $('.crack', s);
+    var sps = $('.sp', s), glow = one('.glow', s), pulse = one('.pulse', s), shock = one('.shock', s);
     var mid = (furrows.length - 1) / 2;
-    var order = furrows.slice().sort(function (a, c) { return Math.abs(furrows.indexOf(a) - mid) - Math.abs(furrows.indexOf(c) - mid); });
+    function fromMid(list) { return list.slice().sort(function (a, c) { return Math.abs(list.indexOf(a) - mid) - Math.abs(list.indexOf(c) - mid); }); }
+    var order = fromMid(furrows), streakOrder = fromMid(streaks);
+    streaks.forEach(function (p) { p._L = Math.ceil(p.getTotalLength()); p.style.strokeDasharray = '110 ' + (p._L + 300); p.style.strokeDashoffset = 110; });
+    // The small sprouts come up in a wave, nearest to the big one first.
+    function far(e) { var m = e.parentNode.transform.baseVal.consolidate().matrix; return Math.hypot(m.e - 500, (m.f - 480) * 2.2); }
+    var near = sps.slice().sort(function (a, c) { return far(a) - far(c); });
     gsap.set(art, { yPercent: 16, opacity: 0 });
-    gsap.set(seeds, { y: -160 });
-    gsap.set(one('.glow', s), { scale: 0.4, svgOrigin: '500 450' });
-    gsap.set(one('.leaf.l', s), { scale: 0, rotation: 30, svgOrigin: '500 472' });
-    gsap.set(one('.leaf.r', s), { scale: 0, rotation: -30, svgOrigin: '501 452' });
+    gsap.set(cam, { scale: 1, svgOrigin: '500 480' });
+    gsap.set(seeds, { y: -180 });
+    gsap.set(rips, { scale: 0.2, opacity: 0, transformOrigin: '50% 50%' });
+    gsap.set(splashes, { scale: 0.2, transformOrigin: '50% 50%' });
+    gsap.set(sps, { scale: 0, transformOrigin: '50% 100%' });
+    gsap.set(shock, { scale: 0.3, svgOrigin: '500 480' });
+    gsap.set(pulse, { scale: 1, svgOrigin: '500 480' });
+    gsap.set(glow, { scale: 0.4, svgOrigin: '500 384' });
+    gsap.set(one('.leaf.l', s), { scale: 0, rotation: 30, svgOrigin: '500 406' });
+    gsap.set(one('.leaf.r', s), { scale: 0, rotation: -30, svgOrigin: '501 386' });
 
     var t = T;
     tl.to(art, { yPercent: 0, opacity: 1, duration: 1.1, ease: 'power3.out' }, t);
+    tl.to(one('.clods', s), { opacity: 1, duration: 1.2 }, t + 0.3);
     inn(b[0]); draw(one('.field-art .horizon', s), t + 0.2, 1.2);
     rest(); out(b[0]);
-    t = T; inn(b[1]); draw(order, t, 1, { stagger: 0.04, ease: 'power2.out' });
+
+    // Split: the ground is cut towards you, light runs down every furrow,
+    // the earth jolts, and the word itself comes apart.
+    t = T; inn(b[1], { d: 0.6, rot: 0, ease: 'power4.out' });
+    draw(order, t + 0.1, 0.8, { stagger: 0.03, ease: 'power3.out' });
+    tl.to(streakOrder, { opacity: 1, duration: 0.05, stagger: 0.03 }, t + 0.1);
+    tl.to(streakOrder, { strokeDashoffset: function (i, e) { return -e._L; }, duration: 0.85, stagger: 0.03, ease: 'power2.in' }, t + 0.1);
+    tl.to(cam, { keyframes: [{ y: 7, duration: 0.07 }, { y: -4, duration: 0.09 }, { y: 0, duration: 0.16 }] }, t + 0.2);
+    tl.to($('.w', b[1]), { x: function (i, e, a) { return (i - (a.length - 1) / 2) * 9; }, duration: 0.7, ease: 'power3.out' }, t + 0.3);
     T = Math.max(T, t + 1.5); rest(); out(b[1]);
-    t = T; inn(b[2]);
-    tl.to(seeds, { y: 0, opacity: 1, duration: 0.6, stagger: 0.045, ease: 'power2.in' }, t);
-    T = Math.max(T, t + 1.3); rest(); out(b[2]);
-    t = T; inn(b[3]);
-    tl.to(drops, { y: 560, duration: 0.7, stagger: 0.02, ease: 'power1.in' }, t);
-    tl.to(drops, { opacity: 0.9, duration: 0.12, stagger: 0.02 }, t);
-    tl.to(drops, { opacity: 0, duration: 0.15, stagger: 0.02 }, t + 0.55);
+
+    // Plant: the letters drop in like seeds, and every seed rings where it lands.
+    t = T; inn(b[2], { y: -118, rot: 0, d: 0.75, st: 0.06, ease: 'back.out(2.4)' });
+    tl.to(seeds, { y: 0, opacity: 1, duration: 0.55, stagger: 0.035, ease: 'power2.in' }, t);
+    rips.forEach(function (r, i) {
+      var land = t + 0.55 + i * 0.035;
+      tl.set(r, { opacity: 0.85 }, land);
+      tl.to(r, { scale: 1, opacity: 0, duration: 0.55, ease: 'power2.out' }, land);
+    });
+    tl.to(seeds, { opacity: 0.7, duration: 0.5 }, t + 1.4);
+    T = Math.max(T, t + 1.6); rest(); out(b[2]);
+
+    // Water: rain across the whole field, splashes, the soil turns wet and
+    // shines, and the word ripples.
+    t = T; inn(b[3], { y: -118, rot: 0, d: 0.7, st: 0.07, ease: 'power2.in' });
+    var wl = $('.w > span', b[3]);
+    tl.to(wl, { y: -5, duration: 0.2, stagger: 0.06, ease: 'sine.out' }, t + 0.75);
+    tl.to(wl, { y: 0, duration: 0.3, stagger: 0.06, ease: 'sine.in' }, t + 0.95);
+    // One shuffled order for all three tweens. A 'random' stagger picks a new
+    // order per tween, and a drop could fade out before it had faded in.
+    var rain = drops.map(function (d, i) { return [(i * 47) % drops.length, d]; })
+      .sort(function (a, c) { return a[0] - c[0]; }).map(function (p) { return p[1]; });
+    tl.to(rain, { opacity: 0.85, duration: 0.1, stagger: 0.016 }, t);
+    tl.to(rain, { y: 720, duration: 0.8, stagger: 0.016 }, t);
+    tl.to(rain, { opacity: 0, duration: 0.1, stagger: 0.016 }, t + 0.7);
+    splashes.forEach(function (e, i) {
+      var hit = t + 0.45 + (i / splashes.length) * 1.3;
+      tl.set(e, { opacity: 0.8 }, hit);
+      tl.to(e, { scale: 1, opacity: 0, duration: 0.45, ease: 'power2.out' }, hit);
+    });
+    tl.to(one('.wet', s), { opacity: 1, duration: 1 }, t + 0.4);
     tl.to(furrows, { stroke: 'rgba(232,201,143,.62)', duration: 0.8 }, t + 0.4);
-    T = Math.max(T, t + 1.35); rest(); out(b[3]);
-    t = T; inn(b[4]); tl.to(furrows, { stroke: 'rgba(232,201,143,.3)', duration: 1 }, t);
-    rest(); out(b[4]);
-    inn(b[5]); rest(); out(b[5]);
-    inn(b[6]); rest(); out(b[6]);
+    tl.to(P, { stars: 0.45, duration: 0.6 }, t);
+    T = Math.max(T, t + 1.9); rest(); out(b[3]);
+
+    // Wait: the word arrives slowly. Days go by over the field, and something
+    // under the soil glows, faintly, like a heartbeat.
+    t = T; inn(b[4], { st: 0.2, d: 0.8, rot: 0, ease: 'power2.out' });
+    tl.to(furrows, { stroke: 'rgba(232,201,143,.3)', duration: 1 }, t);
+    tl.to(one('.wet', s), { opacity: 0, duration: 1.2 }, t);
+    tl.to(P, { stars: 1, duration: 0.6 }, t);
+    for (var k = 0; k < 3; k++) {
+      var dk = t + 0.2 + k * 0.62;
+      tl.to(layers.dawn, { opacity: 0.55, duration: 0.28, ease: 'sine.inOut' }, dk);
+      tl.to(layers.dawn, { opacity: 0, duration: 0.3, ease: 'sine.inOut' }, dk + 0.3);
+    }
+    T = Math.max(T, t + 2.1); rest(); out(b[4]);
+    function beat(at, n) {
+      for (var j = 0; j < n; j++) {
+        tl.to(pulse, { opacity: 0.85, duration: 0.25, ease: 'sine.out' }, at + j * 0.7);
+        tl.to(pulse, { opacity: 0.15, duration: 0.4, ease: 'sine.in' }, at + j * 0.7 + 0.25);
+      }
+    }
+    beat(T - 0.6, 1);
+    t = T; inn(b[5]); beat(t + 0.2, 2); T = Math.max(T, t + 1.6); rest(); out(b[5]);
+
+    // The farmer comes back anyway: footsteps walk in to the spot.
+    t = T; inn(b[6]);
+    steps.forEach(function (e, i) {
+      tl.to(e, { opacity: 0.8, duration: 0.12 }, t + 0.15 + i * 0.13);
+      tl.to(e, { opacity: 0.28, duration: 0.6 }, t + 0.45 + i * 0.13);
+    });
+    beat(t + 1.5, 1);
+    T = Math.max(T, t + 2.1); rest(); out(b[6]);
+
+    // Then one morning: the soil cracks with light, a ring bursts out, the
+    // camera leans in as the sprout rises, and the whole field follows.
     t = T; inn(b[7]);
     sky('dawn', t, 1.6);
-    tl.to(one('.glow', s), { opacity: 1, scale: 1, duration: 1.3 }, t + 0.1);
-    draw(one('.stem', s), t + 0.3, 1, { ease: 'power1.out' });
-    tl.to(one('.leaf.l', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.1);
-    tl.to(one('.leaf.r', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.3);
-    T = Math.max(T, t + 2.05); rest();
+    tl.to(pulse, { opacity: 1, scale: 1.6, duration: 0.3, ease: 'power2.in' }, t + 0.1);
+    tl.to(pulse, { opacity: 0, duration: 0.4 }, t + 0.45);
+    draw(cracks, t + 0.35, 0.45, { stagger: 0.04, ease: 'power3.out' });
+    tl.set(shock, { opacity: 0.9 }, t + 0.4);
+    tl.to(shock, { scale: 5, opacity: 0, duration: 0.9, ease: 'power2.out' }, t + 0.4);
+    tl.to(cam, { scale: 1.12, duration: 1.8, ease: 'power2.inOut' }, t + 0.3);
+    tl.to(glow, { opacity: 1, scale: 1, duration: 1.3 }, t + 0.4);
+    draw(one('.stem', s), t + 0.5, 1, { ease: 'power1.out' });
+    tl.to(one('.leaf.l', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.3);
+    tl.to(one('.leaf.r', s), { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, t + 1.5);
+    tl.to(cracks, { opacity: 0.35, duration: 0.8 }, t + 1.4);
+    tl.to(seeds, { opacity: 0, duration: 0.5, stagger: 0.02 }, t + 1.6);
+    tl.to(near, { scale: 1, duration: 0.6, stagger: 0.05, ease: 'back.out(2.2)' }, t + 1.7);
+    tl.to(steps, { opacity: 0, duration: 0.6 }, t + 1.7);
+    T = Math.max(T, t + 2.9); rest();
     out(b[7]);
     tl.to(art, { yPercent: 12, opacity: 0, duration: 0.7, ease: 'power2.in' }, T - 0.3);
     T += 0.45;

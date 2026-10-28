@@ -14,25 +14,65 @@ const VB = `${bx - pad} ${by - pad} ${bw + 2 * pad} ${bh + 2 * pad}`;
 const PATHS = g.glyphs.map(d => `<path d="${d}"/>`).join('');
 const DRAW = g.glyphs.map(d => `<path class="gl" d="${d}"/>`).join('');
 
-// ---------- field: furrows run from the bottom edge to just under the horizon
+// ---------- field: furrows run from just under the horizon to the bottom edge,
+// so they draw towards the viewer
 let seed = 7;
 const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
 const vp = [500, 200];
-let FURROWS = '';
+const onGround = (bx, t) => [vp[0] + t * (bx - vp[0]), vp[1] + t * (600 - vp[1])];
+let FURROWS = '', STREAKS = '';
 for (let b = -1100; b <= 2100; b += 160) {
-  const ex = vp[0] + 0.05 * (b - vp[0]), ey = vp[1] + 0.05 * (600 - vp[1]);
-  FURROWS += `<path class="draw furrow" d="M${b} 600 L${r1(ex)} ${r1(ey)}"/>`;
+  const [ex, ey] = onGround(b, 0.05);
+  const d = `M${r1(ex)} ${r1(ey)} L${b} 600`;
+  FURROWS += `<path class="draw furrow" d="${d}"/>`;
+  STREAKS += `<path class="streak" d="${d}"/>`;
 }
-let SEEDS = '';
-for (const b of [180, 340, 500, 660, 820]) for (const t of [0.36, 0.6, 0.86]) {
-  if (b === 500 && t === 0.86) continue; // the sprout grows here
-  const x = vp[0] + t * (b - vp[0]), y = vp[1] + t * (600 - vp[1]);
+// soil: small clods, bigger as they come closer
+let CLODS = '';
+for (let i = 0; i < 90; i++) {
+  const t = 0.04 + Math.pow(rand(), 0.8) * 0.96, [x, y] = onGround(-900 + rand() * 2800, t), rx = 0.8 + 4.2 * t;
+  CLODS += `<ellipse cx="${r1(x)}" cy="${r1(y)}" rx="${r1(rx)}" ry="${r1(rx * 0.42)}" opacity="${r1(0.3 + rand() * 0.7)}"/>`;
+}
+// seeds, each with a ring for where it lands and a small sprout for the end
+let SEEDS = '', RIPS = '', SPROUTS = '';
+for (const b of [20, 180, 340, 500, 660, 820, 980]) for (const t of [0.32, 0.5, 0.7, 0.9]) {
+  if (b === 500 && t === 0.7) continue; // the sprout grows here, clear of the nudge
+  const [x, y] = onGround(b, t), k = r1(0.35 + 1.1 * t);
   SEEDS += `<circle class="seed" cx="${r1(x)}" cy="${r1(y)}" r="${r1(2 + 5 * t)}"/>`;
+  RIPS += `<ellipse class="f-rip" cx="${r1(x)}" cy="${r1(y)}" rx="${r1(12 + 34 * t)}" ry="${r1(4 + 11 * t)}"/>`;
+  SPROUTS += `<g transform="translate(${r1(x)} ${r1(y)}) scale(${k})"><g class="sp">` +
+    '<path class="sp-stem" d="M0 0 C -2 -10 2 -20 0 -30"/>' +
+    '<path class="sp-leaf" d="M0 -18 C -8 -19 -15 -27 -15 -35 C -6 -33 0 -26 0 -18 Z"/>' +
+    '<path class="sp-leaf" d="M0 -25 C 8 -28 14 -36 13 -44 C 5 -41 0 -34 0 -25 Z"/></g></g>';
 }
 let DROPS = '';
-for (let i = 0; i < 28; i++) {
-  const x = 180 + rand() * 640, y = -40 - rand() * 160;
-  DROPS += `<path class="drop" d="M${r1(x)} ${r1(y)} l-3 26"/>`;
+for (let i = 0; i < 120; i++) {
+  // two in three fall in the middle, which is all a phone shows
+  const x = i % 3 ? 120 + rand() * 760 : -150 + rand() * 1300, y = -40 - rand() * 300;
+  DROPS += `<path class="drop" d="M${r1(x)} ${r1(y)} l-8 54" opacity="0"/>`;
+}
+let SPLASHES = '';
+for (let i = 0; i < 40; i++) {
+  const t = 0.25 + rand() * 0.75, [x, y] = onGround(80 + rand() * 840, t), rx = 6 + 18 * t;
+  SPLASHES += `<ellipse class="splash" cx="${r1(x)}" cy="${r1(y)}" rx="${r1(rx)}" ry="${r1(rx * 0.36)}"/>`;
+}
+// footprints, walking in from the horizon to the spot where the sprout comes up
+let STEPS = '';
+for (let i = 0; i < 10; i++) {
+  const t = 0.14 + i * 0.056, side = i % 2 ? 1 : -1, [x, y] = onGround(590, t), rx = 3.5 + 9 * t;
+  STEPS += `<ellipse class="step" cx="${r1(x + side * (5 + 14 * t))}" cy="${r1(y)}" rx="${r1(rx)}" ry="${r1(rx * 0.45)}"/>`;
+}
+// cracks of light around the sprout
+let CRACKS = '';
+for (let i = 0; i < 8; i++) {
+  const a = (i / 8) * Math.PI * 2 + 0.3, len = 50 + rand() * 60;
+  let x = 500, y = 480, d = `M500 480`;
+  for (let j = 1; j <= 3; j++) {
+    const aa = a + (rand() - 0.5) * 0.7, l = len / 3;
+    x += Math.cos(aa) * l; y += Math.sin(aa) * l * 0.34;
+    d += ` L${r1(x)} ${r1(y)}`;
+  }
+  CRACKS += `<path class="draw crack" d="${d}"/>`;
 }
 
 // ---------- the day: the sun's path, centre (400, 640), radius 330
@@ -62,11 +102,11 @@ LABELS.forEach((label, i) => {
 });
 
 let html = fs.readFileSync(path.join(__dirname, 'page.html'), 'utf8');
-const fill = { VB, PATHS, DRAW, FURROWS, SEEDS, DROPS, MARKS, SUN: `${r1(sx)} ${r1(sy)}`, RINGDEFS, RINGS };
+const fill = { VB, PATHS, DRAW, FURROWS, STREAKS, CLODS, SEEDS, RIPS, SPROUTS, DROPS, SPLASHES, STEPS, CRACKS, MARKS, SUN: `${r1(sx)} ${r1(sy)}`, RINGDEFS, RINGS };
 html = html.replace(/%%(\w+)%%/g, (m, k) => {
   if (!(k in fill)) throw new Error('no fill for ' + k);
   return fill[k];
 });
-if (/2014/.test(html)) throw new Error('em dash in page');
+if (/\u2014/.test(html)) throw new Error('em dash in page');
 fs.writeFileSync(OUT, html);
 console.log('wrote', OUT, Math.round(html.length / 1024) + 'KB');
