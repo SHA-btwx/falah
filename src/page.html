@@ -422,9 +422,9 @@
           <g class="medal">
             <circle class="beads" r="104"/>
             <circle class="draw mline" r="96"/>
-            <rect class="draw mline" x="-66" y="-66" width="132" height="132"/>
-            <rect class="draw mline" x="-66" y="-66" width="132" height="132" transform="rotate(45)"/>
-            <circle class="draw mline" r="58"/>
+            <!-- a double pointed arch, the shape of a mihrab, around the name -->
+            <path class="draw mline" d="M-56 68 V-6 A88.0 88.0 0 0 1 0 -88 A88.0 88.0 0 0 1 56 -6 V68 Z"/>
+            <path class="draw mline" d="M-48 60 V-6 A75.0 75.0 0 0 1 0 -76 A75.0 75.0 0 0 1 48 -6 V60 Z"/>
             <use class="mname" href="#falahSym" x="-44" y="-22" width="88" height="44"/>
           </g>
         </svg>
@@ -582,9 +582,9 @@
           <g class="medal">
             <circle class="beads" r="104"/>
             <circle class="draw mline" r="96"/>
-            <rect class="draw mline" x="-66" y="-66" width="132" height="132"/>
-            <rect class="draw mline" x="-66" y="-66" width="132" height="132" transform="rotate(45)"/>
-            <circle class="draw mline" r="58"/>
+            <!-- a double pointed arch, the shape of a mihrab, around the name -->
+            <path class="draw mline" d="M-56 68 V-6 A88.0 88.0 0 0 1 0 -88 A88.0 88.0 0 0 1 56 -6 V68 Z"/>
+            <path class="draw mline" d="M-48 60 V-6 A75.0 75.0 0 0 1 0 -76 A75.0 75.0 0 0 1 48 -6 V60 Z"/>
             <use class="mname" href="#falahSym" x="-44" y="-22" width="88" height="44"/>
           </g>
           <text class="mtitle" y="132">Falah Collective</text>
@@ -958,11 +958,12 @@
     var s = scene('sHook', true), b = beats(s), t0 = T;
     var lines = $('.mline', s), name = one('.mname', s), glow = one('.mglow', s), medal = one('.medal', s), art = one('.medal-art', s);
     gsap.set(name, { scale: 0.8, svgOrigin: '0 0' });
-    gsap.set(medal, { rotation: -12, svgOrigin: '0 0' });
+    gsap.set(medal, { scale: 0.94, svgOrigin: '0 0' });
     inn(b[0]);
     draw(lines, t0 + 0.1, 1.5, { stagger: 0.12, ease: 'power1.inOut' });
     tl.to(one('.beads', s), { opacity: 1, duration: 0.8 }, t0 + 0.9);
-    T = Math.max(T, t0 + 1.6); rest();
+    // Rest only once the last line of the arch has closed.
+    T = Math.max(T, t0 + 1.95); rest();
     out(b[0]);
     var t1 = T; inn(b[1]);
     tl.to(name, { opacity: 1, scale: 1, duration: 0.9, ease: 'back.out(1.6)' }, t1 + 0.1);
@@ -973,7 +974,8 @@
     T = outs([b[3], b[4]]) + 0.05;
     tl.to(art, { opacity: 0, scale: 0.9, transformOrigin: '50% 50%', duration: 0.6, ease: 'power2.in' }, T - 0.4);
     T += 0.25;
-    tl.to(medal, { rotation: 12, duration: T - t0 }, t0);
+    // The arch stays upright and only breathes in a little.
+    tl.to(medal, { scale: 1, duration: T - t0 }, t0);
     done(s);
   })();
 
